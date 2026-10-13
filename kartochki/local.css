@@ -1,0 +1,171 @@
+/* Карточки блюд: два варианта из Figma «Повар», Coordination, Section 2 (4940:56004):
+   «белый фон без плашек» (4940:47957) и «оставляем плашки» (4940:51199).
+   tokens.css пока пуст — цвета и размеры сняты с макета, имена — как в «Рецепте». */
+:root{
+  --accent:#1daa47; --accent-icon:#06c160; --accent-bg:#e7f5eb;
+  --bg:#fff; --bg-contrast:#f4f4f4; --border:#e3e6e2;
+  --text:#1c201d; --title:#111111; --mute:#a1a6a1;
+  --star:#f7c153; --star-prod:#f5df4d;
+  --error:#e84435; /* переменная error в файле «Повар» */
+  --shadow:0 4px 12px rgba(20,24,31,.08);
+  --shadow-tight:0 4px 12px -5px rgba(20,24,31,.08);
+  --font:"Golos Text",Arial,sans-serif,-apple-system;
+  --r:12px; --r-s:8px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{display:flex;flex-direction:column;height:100vh;height:100dvh;font:400 14px/20px var(--font);color:var(--text);background:#e5e5ea}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+img{display:block}
+svg{display:block;flex:none}
+
+/* ---------- переключатель вариантов (не часть интерфейса) — приглушённый, не спорит с экраном ---------- */
+.variants{flex:none;width:100%;max-width:500px;margin:0 auto;background:#e5e5ea;padding:6px 12px}
+.variants-tabs{display:flex;gap:2px;padding:2px;border-radius:9px;background:#d9d9de}
+.vtab{flex:1;padding:4px 10px;border-radius:7px;color:#7c817c;font:500 12px/16px var(--font)}
+.vtab.on{background:#f2f2f5;color:#4a4f4a}
+
+/* ---------- экран ---------- */
+.app{flex:1;min-height:0;width:100%;max-width:500px;margin:0 auto;display:flex;flex-direction:column;background:var(--bg);position:relative;overflow:hidden}
+.app.v-b{background:var(--bg-contrast)}
+
+/* шапка с адресом — закреплена */
+.header{flex:none;display:flex;align-items:center;gap:30px;height:56px;padding:8px 16px;background:var(--bg);border-bottom:1px solid var(--bg-contrast);position:relative;z-index:6}
+.back{width:40px;height:40px;border-radius:50%;background:var(--bg-contrast);display:flex;align-items:center;justify-content:center}
+.addr{display:flex;align-items:center;gap:10px;font:500 14px/20px var(--font);min-width:0}
+.addr span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:84px}
+.app.has-cart .scroll{padding-bottom:164px}
+
+/* ---------- карточка повара (прод) ---------- */
+.overview{background:var(--bg-contrast);padding:12px 15px;display:flex;flex-direction:column;gap:12px}
+.cook-card{background:var(--bg);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:14px}
+.cook-head{display:flex;gap:12px;align-items:center}
+.avatar{width:58px;height:58px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 2px #fff}
+.cook-name{font:600 15px/21px var(--font)}
+.cook-spec{font:400 12px/15px var(--font);margin-top:4px}
+.cook-spec .mute{color:var(--mute)}
+.badge-ok{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:var(--r-s);padding:4px 8px;font:400 12px/15px var(--font)}
+.when{background:var(--bg-contrast);border-radius:var(--r-s);padding:10px;text-align:center;font:600 12px/15px var(--font)}
+.about p{margin:0;font:500 14px/20px var(--font);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.about .more{color:var(--accent);font:600 14px/20px var(--font);margin-top:8px}
+.cook-foot{display:flex;align-items:center;justify-content:space-between}
+.loc{display:flex;align-items:center;gap:6px;color:var(--mute);font:400 12px/15px var(--font)}
+.cook-actions{display:flex;gap:12px}
+.pill-btn{display:flex;align-items:center;gap:8px;background:var(--bg-contrast);border-radius:60px;padding:6px 12px;font:500 12px/16px var(--font);height:28px}
+.pill-btn.icon{padding:0;width:28px;justify-content:center}
+.actions3{display:flex;gap:8px}
+.act{flex:1;height:56px;background:var(--bg);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:600 14px/14px var(--font)}
+.reviews{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-radius:var(--r);padding:13px 16px}
+.reviews .r{display:flex;align-items:center;gap:12px;font:600 20px/24px var(--font)}
+.stars{display:flex;gap:4px}
+.reviews .all{color:var(--accent);font:600 14px/16px var(--font)}
+
+/* ---------- вкладки — прилипают под шапкой ---------- */
+/* за табами — сплошной серый, как в макете: на нём белый выбранный таб хорошо виден.
+   Переход в белый фон списка — мягкой полосой под вкладками */
+.tabs{position:sticky;top:0;z-index:5;height:56px;padding:8px 0;background:var(--bg-contrast)}
+.tabs:before{content:"";position:absolute;left:0;right:0;top:100%;height:12px;background:linear-gradient(var(--bg-contrast),rgba(244,244,244,0));pointer-events:none}
+.v-b .tabs:before{display:none}
+.tabs-list{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 16px}
+.tabs-list::-webkit-scrollbar{display:none}
+.tabs:after{content:"";position:absolute;right:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg,rgba(244,244,244,0),var(--bg-contrast));pointer-events:none}
+.tab{flex:none;height:40px;padding:12px;border-radius:var(--r);display:flex;align-items:center;gap:2px;font:600 14px/16px var(--font);color:var(--mute);white-space:nowrap}
+.tab svg path{fill:var(--mute)}
+/* в Figma 0 4 12 −5 #14181F 8%, но в браузере та же тень почти не видна —
+   усилена до вида как в макете */
+.tab.on{background:var(--bg);color:var(--accent);box-shadow:0 4px 12px -4px rgba(20,24,31,.16)}
+.tab.on svg path{fill:var(--accent)}
+
+/* ---------- секции ---------- */
+.section{padding:12px 16px 12px}
+.section h2{margin:0 0 12px;font:600 18px/22px var(--font)}
+.section h2 small{display:block;margin-top:2px;font:400 12px/15px var(--font);color:var(--mute)}
+.grid{display:grid;grid-template-columns:1fr 1fr;column-gap:13px}
+.v-a .grid{row-gap:20px;align-items:start}
+.v-b .grid{row-gap:13px}
+
+/* ---------- общие кусочки карточки ---------- */
+.photo{position:relative;aspect-ratio:165/163;background:var(--accent-bg);overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+.heart{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+.heart svg{width:12px;height:10px}
+.heart.on svg path{fill:var(--text)}
+.later-text{color:var(--mute)}
+
+/* ---------- вариант А: белый фон без плашек ---------- */
+.ca{display:flex;flex-direction:column;gap:2px;cursor:pointer;min-width:0}
+.ca .photo{border-radius:var(--r)}
+/* обновлено 12.10 по макету 4940:56008: рейтинг и «+» на фото слева, цена 15/21, вес тёмным */
+.ca .heart{box-shadow:var(--shadow-tight)}
+.ca .rate-tag{position:absolute;left:8px;top:8px;display:flex;align-items:center;gap:4px;height:24px;padding:4px 6px 4px 4px;border-radius:var(--r-s);background:#fff;font:400 12px/15px var(--font);white-space:nowrap}
+.ca .plus{position:absolute;left:8px;bottom:8px;width:48px;height:40px;border-radius:var(--r);background:#fff;box-shadow:var(--shadow-tight);display:flex;align-items:center;justify-content:center}
+.ca .step{position:absolute;left:8px;bottom:8px;width:135px;height:40px;border-radius:var(--r);background:var(--bg-contrast);display:flex;align-items:center;justify-content:space-between}
+.ca .step button{width:48px;height:40px;border-radius:var(--r);background:#fff;box-shadow:var(--shadow-tight);display:flex;align-items:center;justify-content:center}
+.ca .step b{flex:1;text-align:center;font:600 15px/21px var(--font)}
+.ca .head{display:flex;flex-direction:column}
+.ca .price{font:600 15px/21px var(--font);white-space:nowrap}
+.rate{display:flex;align-items:center;gap:4px;font:400 12px/15px var(--font);white-space:nowrap}
+.ca .name{font:400 12px/15px var(--font);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ca .meta{font:400 12px/15px var(--font);color:var(--mute)}
+.ca .meta.dark{color:var(--text)}
+.ca .time{align-self:flex-start;margin-top:2px;display:flex;align-items:center;gap:4px;padding:4px 8px 4px 6px;border-radius:var(--r-s);background:var(--bg-contrast);font:400 12px/15px var(--font)}
+
+/* ---------- вариант Б: оставляем плашки ---------- */
+.cb{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;min-width:0}
+.cb .heart{border:1px solid var(--border)}
+.cb .rating{position:absolute;left:8px;bottom:8px;display:flex;align-items:center;gap:4px;background:#fff;border-radius:var(--r-s);padding:3px 8px;font:600 12px/15px var(--font)}
+.cb .rating .cnt{color:var(--mute);font-weight:400}
+.cb .text{padding:6px 6px 4px;display:flex;flex-direction:column;gap:2px}
+/* вес и порции — сразу под названием, даже если оно в одну строку; лишнее место уходит вниз */
+.cb .name{font:600 14px/16.8px var(--font);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cb .meta{font:400 12px/15px var(--font);color:var(--mute)}
+.cb .bottom{margin-top:auto;padding:0 6px 6px}
+/* время — по левому краю; место под него есть всегда, даже пустое, чтобы кнопка не прилипала к цене за порцию */
+.cb .time{display:flex;align-items:center;gap:4px;height:24px;font:400 12px/15px var(--font)}
+.cb .btn{width:100%;height:32px;border-radius:var(--r-s);background:var(--accent);color:#fff;font:500 16px/22px var(--font);display:flex;align-items:center;justify-content:center}
+.cb .btn.later{background:var(--bg-contrast);color:var(--mute);font:500 14px/20px var(--font)}
+.cb .btn.step{justify-content:space-between;padding:0 4px}
+.cb .btn.step button{width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+.cb .btn.step svg path{fill:#fff}
+
+/* ---------- низ: поиск, корзина, доставка — закреплены ---------- */
+.fabs{position:absolute;left:20px;right:20px;bottom:20px;z-index:7;display:flex;justify-content:space-between;pointer-events:none}
+/* над полосой доставки — 12 px; точная высота полосы ставится из app.js */
+.app.has-cart .fabs{bottom:85px}
+.fab{pointer-events:auto;height:44px;border-radius:var(--r);display:flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;font:600 16px/16px var(--font)}
+.fab.search{background:#fff;border:1px solid var(--border);color:var(--title);box-shadow:var(--shadow)}
+.fab.cart{background:var(--accent);color:#fff;box-shadow:var(--shadow)}
+.delivery{position:absolute;left:0;right:0;bottom:0;z-index:7;background:#fff;border-top:1px solid var(--border);padding:12px 16px 20px;display:none;flex-direction:column;gap:4px}
+.app.has-cart .delivery{display:flex}
+.dl-row{display:flex;align-items:center;gap:6px;height:20px}
+.dl-sum{font:600 14px/16px var(--font);color:var(--title);white-space:nowrap}
+.dl-track{flex:1;height:4px;border-radius:99px;background:rgba(6,193,96,.24);overflow:hidden}
+.dl-fill{height:100%;border-radius:99px;background:var(--accent);transition:width .25s}
+.dl-cost{background:var(--accent);color:#fff;border-radius:99px;padding:2px 6px;font:600 12px/16px var(--font);white-space:nowrap}
+.dl-text{display:flex;align-items:center;justify-content:center;gap:8px;font:400 12px/16px var(--font)}
+.dl-text b{font-weight:600}
+
+/* ---------- шторка блюда (прод) ---------- */
+.sheet-wrap{position:absolute;inset:0;z-index:20;display:none}
+.sheet-wrap.open{display:block}
+.shade{position:absolute;inset:0;background:rgba(28,32,29,.4)}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:92%;background:var(--bg);border-radius:16px 16px 0 0;overflow:hidden;display:flex;flex-direction:column}
+.sheet-photo{position:relative;aspect-ratio:1/0.9;background:var(--accent-bg)}
+.sheet-photo img{width:100%;height:100%;object-fit:cover}
+.sheet-x{position:absolute;right:12px;top:12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.35);color:#fff;display:flex;align-items:center;justify-content:center}
+.sheet-body{padding:16px;overflow-y:auto}
+.sheet-row{display:flex;justify-content:space-between;align-items:center}
+.sheet-price{font:700 24px/30px var(--font)}
+.sheet-meta{margin-top:12px;color:var(--mute);font:400 14px/18px var(--font)}
+.sheet-name{margin-top:8px;font:500 18px/24px var(--font)}
+.sheet-time{margin-top:14px;display:flex;align-items:center;gap:8px;border-radius:var(--r);padding:12px;background:var(--bg-contrast);font:400 14px/20px var(--font)}
+.sheet-desc{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font:500 15px/20px var(--font)}
+.sheet-cta{padding:12px 16px 20px;border-top:1px solid #eceeeb}
+.sheet-cta button{width:100%;height:52px;border-radius:var(--r);background:var(--accent);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:0 20px;font:600 16px/20px var(--font)}
+.sheet-cta button.later{background:var(--bg-contrast);color:var(--mute);justify-content:center}
+
+/* цвет строки времени (13.10, макет 4940:51199) */
+.time,.sheet-time{color:var(--text)}
+.time.slow,.sheet-time.slow{color:var(--error)}
