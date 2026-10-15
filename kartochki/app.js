@@ -5,7 +5,7 @@ for (const [n, img, kg, cnt, u, pp, price, rc, h] of RAW) DISH[n] = { n, img, kg
 const kind = d => d.h <= 2 ? 'fast' : d.h > DEFAULT_H ? 'slow' : 'mid';
 const CATS = [
   { name: 'Повар рекомендует', tab: 'Рекомендует', icon: 'logo', dishes: CAT_NAMES['Повар рекомендует'] },
-  { name: 'Быстро', tab: 'Быстро', icon: 'fast', sub: 'Готовлю за 1–2 часа', dishes: RAW.map(r => r[0]).filter(n => kind(DISH[n]) === 'fast') },
+  { name: 'Быстро', tab: 'Быстро', icon: 'fast', dishes: RAW.map(r => r[0]).filter(n => kind(DISH[n]) === 'fast') },
   ...Object.keys(CAT_NAMES).filter(k => k !== 'Повар рекомендует').map(k => ({ name: k, tab: k, dishes: CAT_NAMES[k] })),
 ];
 
@@ -15,8 +15,16 @@ const money = n => n.toLocaleString('ru-RU').replace(/ /g, ' ') + ' ₽';
 const unitMany = d => d.u === 'ш' ? plural(d.cnt, 'штука', 'штуки', 'штук') : plural(d.cnt, 'порция', 'порции', 'порций');
 const weight = d => `${d.kg} кг ≈ ${d.cnt} ${unitMany(d)}`;
 const perPrice = d => `${d.pp} ₽ за ${d.u === 'ш' ? 'штуку' : 'порцию'}`;
-// с 13.10 у всех одна формулировка: «Сегодня с …» / «Завтра с …»
-const timeText = d => NOW + d.h >= 21 ? 'Завтра с 12:00' : `Сегодня с ${NOW + d.h}:00`;
+/* Время (15.10, макет 5054:67717): до 2 часов — минутами и серым время «120 минут · с 14:00»;
+   больше 2 часов сегодня — «С 15:00»; не сегодня — «Завтра с 12:00» красным. */
+const isTomorrow = d => NOW + d.h >= 21;
+const durText = d => d.h <= 2 ? `${d.h * 60} минут` : `${d.h} ${plural(d.h, 'час', 'часа', 'часов')}`;
+function timeHTML(d) {
+  if (isTomorrow(d)) return 'Завтра с 12:00';
+  if (d.h <= 2) return `${durText(d)}<span class="t-mute"> · с ${NOW + d.h}:00</span>`;
+  return `С ${NOW + d.h}:00`;
+}
+const tone = d => isTomorrow(d) ? 'late' : kind(d) === 'fast' ? 'fast' : 'mid';
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
 /* ---------- иконки (из Figma) ---------- */
@@ -27,6 +35,9 @@ const I = {
   star12: '<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M7.69764 1.32291C7.81678 1.06462 8.18387 1.06462 8.30301 1.32291L9.99118 4.98285C10.0397 5.08812 10.1395 5.1606 10.2546 5.17425L14.2571 5.64881C14.5396 5.6823 14.653 6.03143 14.4442 6.22455L11.485 8.96108C11.3999 9.03979 11.3618 9.15706 11.3844 9.27077L12.1699 13.224C12.2253 13.503 11.9284 13.7188 11.6802 13.5798L8.16314 11.6112C8.06198 11.5545 7.93867 11.5545 7.83751 11.6112L4.3205 13.5798C4.07229 13.7188 3.77531 13.503 3.83074 13.224L4.61624 9.27077C4.63884 9.15706 4.60073 9.03979 4.51562 8.96108L1.55648 6.22455C1.34765 6.03143 1.46109 5.6823 1.74355 5.64881L5.74603 5.17425C5.86115 5.1606 5.96092 5.08812 6.00947 4.98285L7.69764 1.32291Z" fill="#F7C153"/></svg>',
   plus: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M11.25 20.5V12.75H3.5V11.25H11.25V3.5H12.75V11.25H20.5V12.75H12.75V20.5H11.25Z" fill="#1C201D"/></svg>',
   minus: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3.5 12.75V11.25H20.5V12.75H3.5Z" fill="#1C201D"/></svg>',
+  filter: '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#1DAA47" d="M10.2 17.4h3.6v-1.8h-3.6zM3.9 6.6v1.8h16.2V6.6zm2.7 6.3h10.8v-1.8H6.6z"/></svg>',
+  fastFill: '<svg width="24" height="24" viewBox="0 0 16 16" fill="none"><path d="M5.98789 14.0282L6.78789 9.66674H3.83789L8.73139 2.00391H9.41856L8.82506 7.13341H12.0916L6.67506 14.0282H5.98789Z" fill="#1DAA47"/></svg>',
+  heart16: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13.6 2.9 8.5A3.3 3.3 0 0 1 7.6 3.8l.4.45.4-.45a3.3 3.3 0 0 1 4.7 4.7L8 13.6Z" stroke="#1C201D" stroke-width="1.3" stroke-linejoin="round"/></svg>',
   heart: '<svg width="12" height="10" viewBox="13 10 12 10" fill="none"><path d="M19.0003 19.2353L14.4827 14.7177C14.0801 14.1654 13.9135 13.4758 14.0194 12.8007C14.1253 12.1256 14.4951 11.5202 15.0474 11.1177C15.5996 10.7152 16.2892 10.5485 16.9643 10.6544C17.6394 10.7603 18.2449 11.1301 18.6474 11.6824L19.0003 12.1059L19.3532 11.6824C19.7557 11.1301 20.3612 10.7603 21.0363 10.6544C21.7114 10.5485 22.401 10.7152 22.9532 11.1177C23.5055 11.5202 23.8753 12.1256 23.9812 12.8007C24.0871 13.4758 23.9205 14.1654 23.5179 14.7177L19.0003 19.2353Z" stroke="#1C201D" stroke-width="1.13" stroke-linejoin="round"/></svg>',
   logo: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5.86149 13.7215C5.86152 14.0635 6.21786 14.0374 6.35119 13.923L8.08586 12.1684C8.18493 12.0681 8.31714 12.0091 8.45641 12.0021L8.48434 12.0014H11.0799L11.1048 12.0007C11.3521 11.9887 11.5559 11.7987 11.5881 11.5502L11.5907 11.5261L11.8067 8.92839C11.8118 8.86787 11.8541 8.81726 11.9123 8.80222L12.1206 8.74833C13.1677 8.47781 13.9501 7.53774 13.9977 6.40614L14 6.29682C14 4.92139 12.9154 3.80226 11.5647 3.76761L11.5003 3.76677C11.3606 3.76677 11.2233 3.77856 11.0896 3.80089L10.8786 3.83612C10.8197 3.84595 10.761 3.81711 10.7322 3.76413L10.6293 3.5746C10.1345 2.66443 9.19342 2.04008 8.10567 2.00195L8 2C6.86764 2 5.88116 2.63506 5.37041 3.5746L5.26749 3.76413C5.23295 3.81676 5.18333 3.84124 5.12108 3.83612L4.91015 3.80089C4.77433 3.77822 4.63749 3.76824 4.49998 3.76677C3.1194 3.76677 2.00002 4.89956 2 6.29682L2.00069 6.35211C2.02517 7.50768 2.81557 8.47346 3.87928 8.74833L4.0876 8.80222C4.14575 8.81725 4.1881 8.86787 4.19314 8.92839L4.4093 11.5261C4.43099 11.7863 4.64007 11.9885 4.89529 12.0009L5.57969 12.0014C5.73531 12.0014 5.86149 12.1291 5.86149 12.2866V13.7215Z" fill="#1DAA47"/></svg>',
   search: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17.4279 16.1553L21.2826 20.0091L20.0091 21.2826L16.1553 17.4279C14.7214 18.5774 12.9378 19.2026 11.1 19.2C6.6288 19.2 3 15.5712 3 11.1C3 6.6288 6.6288 3 11.1 3C15.5712 3 19.2 6.6288 19.2 11.1C19.2026 12.9378 18.5774 14.7214 17.4279 16.1553ZM15.6225 15.4875C16.7647 14.3129 17.4026 12.7384 17.4 11.1C17.4 7.6188 14.5803 4.8 11.1 4.8C7.6188 4.8 4.8 7.6188 4.8 11.1C4.8 14.5803 7.6188 17.4 11.1 17.4C12.7384 17.4026 14.3129 16.7647 15.4875 15.6225L15.6225 15.4875Z" fill="#111111"/></svg>',
@@ -47,28 +58,15 @@ const I = {
 };
 
 /* ---------- состояние ---------- */
-const state = { v: 'b', cart: { ...CART_START }, fav: {} };
+const state = { cart: { ...CART_START }, fav: {} };
 const $ = s => document.querySelector(s);
 
 /* ---------- карточки ---------- */
 /* время — у каждой карточки (13.10): быстрые — зелёная молния, обычные — чёрные часы,
    долгие — красные часы и красный текст */
 function timeBadge(d) {
-  const k = kind(d);
-  return `<div class="time ${k}">${k === 'fast' ? I.fast : I.clock}<span>${timeText(d)}</span></div>`;
-}
-function cardA(d) {
-  const q = state.cart[d.n] || 0;
-  const ctrl = d.price === null ? '' : q
-    ? `<div class="step"><button data-dec="${esc(d.n)}" type="button">${I.minus}</button><b>${q}</b><button data-inc="${esc(d.n)}" type="button">${I.plus}</button></div>`
-    : `<button class="plus" data-inc="${esc(d.n)}" type="button">${I.plus}</button>`;
-  return `<div class="ca" data-dish="${esc(d.n)}">
-    <div class="photo"><img loading="lazy" src="${IMG(d.img)}" alt="">${d.rc ? `<span class="rate-tag">${I.star16}5.0 (${d.rc})</span>` : ''}<button class="heart ${state.fav[d.n] ? 'on' : ''}" data-fav="${esc(d.n)}" type="button">${I.heart}</button>${ctrl}</div>
-    <div class="head"><span class="price ${d.price === null ? 'later-text' : ''}">${d.price === null ? 'Будет позже' : money(d.price)}</span><div class="name">${esc(d.n)}</div></div>
-    <div class="meta dark">${weight(d)}</div>
-    <div class="meta">${perPrice(d)}</div>
-    ${timeBadge(d)}
-  </div>`;
+  const t = tone(d);
+  return `<div class="time ${t}">${t === 'fast' ? I.fast : I.clock}<span>${timeHTML(d)}</span></div>`;
 }
 function cardB(d) {
   const q = state.cart[d.n] || 0;
@@ -76,8 +74,8 @@ function cardB(d) {
     ? `<div class="btn step"><button data-dec="${esc(d.n)}" type="button">${I.minus}</button><span>${q}</span><button data-inc="${esc(d.n)}" type="button">${I.plus}</button></div>`
     : `<button class="btn" data-inc="${esc(d.n)}" type="button">${money(d.price)}</button>`;
   return `<div class="cb" data-dish="${esc(d.n)}">
-    <div class="photo"><img loading="lazy" src="${IMG(d.img)}" alt=""><button class="heart ${state.fav[d.n] ? 'on' : ''}" data-fav="${esc(d.n)}" type="button">${I.heart}</button>${d.rc ? `<div class="rating">${I.star12}5.0 <span class="cnt">(${d.rc})</span></div>` : ''}</div>
-    <div class="text"><div class="name">${esc(d.n)}</div><div class="meta">${weight(d)}</div><div class="meta">${perPrice(d)}</div></div>
+    <div class="photo"><img loading="lazy" src="${IMG(d.img)}" alt="">${d.rc ? `<div class="rating">${I.star16}<span>5.0<span class="cnt"> (${d.rc})</span></span></div>` : ''}<button class="heart ${state.fav[d.n] ? 'on' : ''}" data-fav="${esc(d.n)}" type="button">${I.heart16}</button></div>
+    <div class="text"><div class="name">${esc(d.n)}</div><div class="meta">${weight(d)}</div></div>
     <div class="bottom">${timeBadge(d)}${btn}</div>
   </div>`;
 }
@@ -97,12 +95,12 @@ function overview() {
   </div>`;
 }
 function tabsBar() {
-  return `<div class="tabs"><div class="tabs-list" id="tabsList">${CATS.map((c, i) =>
+  return `<div class="tabs"><span class="tabs-filter">${I.filter}</span><div class="tabs-list" id="tabsList">${CATS.map((c, i) =>
     `<button class="tab" data-go="sec-${i}" type="button">${c.icon ? I[c.icon] : ''}${c.tab}</button>`).join('')}</div></div>`;
 }
 function sections() {
-  const card = state.v === 'a' ? cardA : cardB;
-  return CATS.map((c, i) => `<div class="section" id="sec-${i}"><h2>${c.name}${c.sub ? `<small>${c.sub}</small>` : ''}</h2>
+  const card = cardB;
+  return CATS.map((c, i) => `<div class="section" id="sec-${i}"><h2>${c.icon === 'fast' ? I.fastFill : ''}<span>${c.name}</span></h2>
     <div class="grid">${c.dishes.map(n => card(DISH[n])).join('')}</div></div>`).join('');
 }
 
@@ -125,9 +123,8 @@ function renderBottom() {
 
 function render(keep) {
   const sc = $('#scroll'), y = sc.scrollTop, tx = $('#tabsList') ? $('#tabsList').scrollLeft : 0;
-  $('#app').className = 'app v-' + state.v;
+  $('#app').className = 'app v-b';
   sc.innerHTML = overview() + tabsBar() + sections();
-  document.querySelectorAll('.vtab').forEach(b => b.classList.toggle('on', b.dataset.v === state.v));
   renderBottom();
   if (keep) { sc.scrollTop = y; $('#tabsList').scrollLeft = tx; }
   syncTabs();
@@ -156,7 +153,7 @@ function openSheet(name) {
       <div class="sheet-row"><div class="sheet-price">${d.price === null ? 'Будет позже' : money(d.price)}</div>${d.rc ? `<div class="rate">${I.star16}5.0 (${d.rc})</div>` : ''}</div>
       <div class="sheet-row sheet-meta"><span>${weight(d)}</span><span>${perPrice(d)}</span></div>
       <div class="sheet-name">${esc(d.name || d.n)}</div>
-      <div class="sheet-time ${k}">${k === 'fast' ? I.fast : I.clock}<span>${timeText(d)} · готовлю ${d.h} ч</span></div>
+      <div class="sheet-time ${tone(d)}">${k === 'fast' ? I.fast : I.clock}<span>${isTomorrow(d) ? 'Завтра с 12:00' : `Сегодня с ${NOW + d.h}:00`} · готовится ${durText(d)}</span></div>
       <div class="sheet-desc">Описание и состав</div>
     </div>
     <div class="sheet-cta">${d.price === null ? '<button class="later" type="button">Будет позже</button>' : `<button data-inc="${esc(d.n)}" data-close="1" type="button"><span>В корзину</span><span>${money(d.price)}</span></button>`}</div>
@@ -166,16 +163,8 @@ function openSheet(name) {
 
 /* ---------- события ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-v],[data-inc],[data-dec],[data-fav],[data-go],[data-close],[data-dish]');
+  const t = e.target.closest('[data-inc],[data-dec],[data-fav],[data-go],[data-close],[data-dish]');
   if (!t) return;
-  if (t.dataset.v) {
-    // высота карточек в вариантах разная — остаёмся в той же категории, а не на том же пикселе
-    const sc = $('#scroll'), secs = [...sc.querySelectorAll('.section')];
-    const cur = secs.filter(s => s.offsetTop - 112 <= sc.scrollTop + 10).pop();
-    state.v = t.dataset.v; history.replaceState(null, '', '#' + state.v); render(true);
-    if (cur) { sc.scrollTop = document.getElementById(cur.id).offsetTop - 112; syncTabs(); }
-    return;
-  }
   if (t.dataset.inc) { state.cart[t.dataset.inc] = (state.cart[t.dataset.inc] || 0) + 1; if (t.dataset.close) $('#sheet').classList.remove('open'); render(true); return; }
   if (t.dataset.dec) { const n = t.dataset.dec; state.cart[n] = (state.cart[n] || 0) - 1; if (state.cart[n] <= 0) delete state.cart[n]; render(true); return; }
   if (t.dataset.fav) { state.fav[t.dataset.fav] = !state.fav[t.dataset.fav]; render(true); return; }
@@ -186,5 +175,4 @@ document.addEventListener('click', e => {
 
 $('#header').innerHTML = `<span class="back">${I.back}</span><div class="addr">${I.send}<span>г Тюмень, ул. Ленина, д 2а</span></div>`;
 $('#scroll').addEventListener('scroll', syncTabs, { passive: true });
-state.v = location.hash === '#a' ? 'a' : 'b'; // по умолчанию — с плашками
 render(false);
