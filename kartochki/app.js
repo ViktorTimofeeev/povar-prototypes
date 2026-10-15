@@ -14,6 +14,8 @@ const plural = (n, a, b, c) => n % 10 === 1 && n % 100 !== 11 ? a : n % 10 >= 2 
 const money = n => n.toLocaleString('ru-RU').replace(/ /g, ' ') + ' ₽';
 const unitMany = d => d.u === 'ш' ? plural(d.cnt, 'штука', 'штуки', 'штук') : plural(d.cnt, 'порция', 'порции', 'порций');
 const weight = d => `${d.kg} кг ≈ ${d.cnt} ${unitMany(d)}`;
+// в карточке (15.10): «0.8 кг ≈ 4 порц. по 278 ₽» / «0.6 кг ≈ 4 шт. по 78 ₽»
+const weightShort = d => `${d.kg} кг ≈ ${d.cnt} ${d.u === 'ш' ? 'шт.' : 'порц.'} по ${d.pp} ₽`;
 const perPrice = d => `${d.pp} ₽ за ${d.u === 'ш' ? 'штуку' : 'порцию'}`;
 /* Время (15.10, макет 5054:67717): до 2 часов — минутами и серым время «120 минут · с 14:00»;
    больше 2 часов сегодня — «С 15:00»; не сегодня — «Завтра с 12:00» красным. */
@@ -75,7 +77,7 @@ function cardB(d) {
     : `<button class="btn" data-inc="${esc(d.n)}" type="button">${money(d.price)}</button>`;
   return `<div class="cb" data-dish="${esc(d.n)}">
     <div class="photo"><img loading="lazy" src="${IMG(d.img)}" alt="">${d.rc ? `<div class="rating">${I.star16}<span>5.0<span class="cnt"> (${d.rc})</span></span></div>` : ''}<button class="heart ${state.fav[d.n] ? 'on' : ''}" data-fav="${esc(d.n)}" type="button">${I.heart16}</button></div>
-    <div class="text"><div class="name">${esc(d.n)}</div><div class="meta">${weight(d)}</div></div>
+    <div class="text"><div class="name">${esc(d.n)}</div><div class="meta">${weightShort(d)}</div></div>
     <div class="bottom">${timeBadge(d)}${btn}</div>
   </div>`;
 }
