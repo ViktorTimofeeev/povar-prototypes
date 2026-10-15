@@ -132,17 +132,46 @@ function render(keep) {
 
 /* активная вкладка — по прокрутке */
 function syncTabs() {
+  if (scrollAnim) return; // во время прокрутки по клику подсветка уже стоит на цели
   const sc = $('#scroll'), tabs = [...sc.querySelectorAll('.tab')]; if (!tabs.length) return;
   const line = sc.getBoundingClientRect().top + 70;
   let cur = tabs[0];
   tabs.forEach(t => { const s = document.getElementById(t.dataset.go); if (s.getBoundingClientRect().top <= line) cur = t; });
-  if (!cur.classList.contains('on')) {
-    tabs.forEach(t => t.classList.toggle('on', t === cur));
-    // ленту вкладок двигаем сами: scrollIntoView сбивает плавную прокрутку страницы
-    const list = $('#tabsList'), l = cur.offsetLeft - 16, r = cur.offsetLeft + cur.offsetWidth + 16 - list.clientWidth;
-    if (list.scrollLeft > l) list.scrollLeft = l; else if (list.scrollLeft < r) list.scrollLeft = r;
-  }
+  setActiveTab(cur);
 }
+function setActiveTab(cur) {
+  if (cur.classList.contains('on')) return;
+  $('#scroll').querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t === cur));
+  // ленту вкладок двигаем сами: scrollIntoView сбивает прокрутку страницы
+  const list = $('#tabsList'), l = cur.offsetLeft - 16, r = cur.offsetLeft + cur.offsetWidth + 16 - list.clientWidth;
+  if (list.scrollLeft > l) list.scrollTo({ left: l, behavior: 'smooth' }); else if (list.scrollLeft < r) list.scrollTo({ left: r, behavior: 'smooth' });
+}
+
+/* Вкладки — навигация: по клику плавно прокручиваем к разделу (15.10).
+   Своя анимация: встроенная smooth-прокрутка на длинном меню обрывалась. */
+let scrollAnim = null; // номер текущей прокрутки; null — не идёт
+function scrollToSection(id) {
+  const sc = $('#scroll'), start = sc.scrollTop;
+  const dist = Math.max(0, document.getElementById(id).offsetTop - 112) - start;
+  stopScrollAnim();
+  setActiveTab(sc.querySelector(`.tab[data-go="${id}"]`));
+  if (!dist) return;
+  const dur = Math.min(700, 250 + Math.abs(dist) / 15);
+  const ease = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const run = scrollAnim = Symbol();
+  let t0 = null; // отсчёт от первого шага: если браузер задержал кадр, прокрутка не превратится в рывок
+  // шаг — по кадру или по таймеру, что раньше: кадры в некоторых окнах приходят с задержкой
+  const next = () => { let done = false; const go = () => { if (!done) { done = true; step(); } }; requestAnimationFrame(go); setTimeout(go, 34); };
+  const step = () => {
+    if (scrollAnim !== run) return;
+    const now = performance.now(); if (t0 === null) t0 = now;
+    const p = Math.min(1, (now - t0) / dur);
+    sc.scrollTop = start + dist * ease(p);
+    if (p < 1) next(); else { scrollAnim = null; syncTabs(); }
+  };
+  next();
+}
+function stopScrollAnim() { scrollAnim = null; }
 
 /* ---------- шторка ---------- */
 function openSheet(name) {
@@ -168,11 +197,13 @@ document.addEventListener('click', e => {
   if (t.dataset.inc) { state.cart[t.dataset.inc] = (state.cart[t.dataset.inc] || 0) + 1; if (t.dataset.close) $('#sheet').classList.remove('open'); render(true); return; }
   if (t.dataset.dec) { const n = t.dataset.dec; state.cart[n] = (state.cart[n] || 0) - 1; if (state.cart[n] <= 0) delete state.cart[n]; render(true); return; }
   if (t.dataset.fav) { state.fav[t.dataset.fav] = !state.fav[t.dataset.fav]; render(true); return; }
-  if (t.dataset.go) { const sc = $('#scroll'); sc.scrollTo({ top: document.getElementById(t.dataset.go).offsetTop - 112 }); return; }
+  if (t.dataset.go) { scrollToSection(t.dataset.go); return; }
   if (t.dataset.close) { $('#sheet').classList.remove('open'); return; }
   if (t.dataset.dish) openSheet(t.dataset.dish);
 });
 
 $('#header').innerHTML = `<span class="back">${I.back}</span><div class="addr">${I.send}<span>г Тюмень, ул. Ленина, д 2а</span></div>`;
 $('#scroll').addEventListener('scroll', syncTabs, { passive: true });
+// пользователь сам взялся за прокрутку — анимацию останавливаем
+['wheel', 'touchstart'].forEach(ev => $('#scroll').addEventListener(ev, () => { if (scrollAnim) { stopScrollAnim(); syncTabs(); } }, { passive: true }));
 render(false);

@@ -64,14 +64,15 @@ svg{display:block;flex:none}
 .tabs-filter{flex:none;width:40px;height:40px;margin-right:8px;border-radius:var(--r);background:var(--bg);display:flex;align-items:center;justify-content:center}
 .tabs:before{content:"";position:absolute;left:0;right:0;top:100%;height:12px;background:linear-gradient(var(--bg-contrast),rgba(244,244,244,0));pointer-events:none}
 .v-b .tabs:before{display:none}
-.tabs-list{flex:1;min-width:0;display:flex;overflow-x:auto;scrollbar-width:none;padding-right:16px}
+.tabs-list{position:relative;flex:1;min-width:0;display:flex;overflow-x:auto;scrollbar-width:none;padding-right:16px}
 .tabs-list::-webkit-scrollbar{display:none}
 .tabs:after{content:"";position:absolute;right:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg,rgba(244,244,244,0),var(--bg-contrast));pointer-events:none}
 .tab{flex:none;height:40px;padding:12px;border-radius:var(--r);display:flex;align-items:center;gap:4px;font:600 14px/16px var(--font);color:var(--mute);white-space:nowrap}
 .tab svg path{fill:var(--mute)}
 /* в Figma 0 4 12 −5 #14181F 8%, но в браузере та же тень почти не видна —
    усилена до вида как в макете */
-.tab.on{background:var(--bg);color:var(--accent);box-shadow:0 4px 12px -4px rgba(20,24,31,.16)}
+/* 15.10: без тени */
+.tab.on{background:var(--bg);color:var(--accent)}
 .tab.on svg path{fill:var(--accent)}
 
 /* ---------- секции ---------- */
@@ -105,7 +106,7 @@ svg{display:block;flex:none}
 .cb .meta{font:400 12px/15px var(--font);color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cb .bottom{margin-top:auto;padding:0 6px 6px}
 /* время — по левому краю; место под него есть всегда, даже пустое, чтобы кнопка не прилипала к цене за порцию */
-.cb .time{display:flex;align-items:center;gap:4px;height:24px;font:400 12px/15px var(--font)}
+.cb .time{display:flex;align-items:center;gap:4px;height:24px;margin-bottom:2px;font:400 12px/15px var(--font)} /* 2 px до кнопки — 15.10 */
 .cb .btn{width:100%;height:32px;border-radius:var(--r-s);background:var(--accent);color:#fff;font:500 16px/22px var(--font);display:flex;align-items:center;justify-content:center}
 .cb .btn.later{background:var(--bg-contrast);color:var(--mute);font:500 14px/20px var(--font)}
 .cb .btn.step{justify-content:space-between;padding:0 4px}
