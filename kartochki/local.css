@@ -103,7 +103,7 @@ svg{display:block;flex:none}
 .cb .text{padding:6px 6px 0;display:flex;flex-direction:column;gap:4px}
 /* вес и порции — сразу под названием, даже если оно в одну строку; лишнее место уходит вниз */
 .cb .name{font:600 14px/16.8px var(--font);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.cb .meta{font:400 12px/15px var(--font);color:var(--mute);white-space:pre} /* как на проде: двойной пробел, без многоточия — длинная строка уходит за край и обрезается границей карточки */
+.cb .meta{font:400 12px/15px var(--font);color:var(--mute);white-space:nowrap} /* как на проде: без многоточия — длинная строка уходит за край и обрезается границей карточки */
 .cb .bottom{margin-top:auto;padding:0 6px 6px}
 /* время — по левому краю; место под него есть всегда, даже пустое, чтобы кнопка не прилипала к цене за порцию */
 .cb .time{display:flex;align-items:center;gap:4px;height:24px;margin-bottom:2px;font:400 12px/15px var(--font)} /* 2 px до кнопки — 15.10 */
