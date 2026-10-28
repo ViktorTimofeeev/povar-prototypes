@@ -1,0 +1,215 @@
+/* Главная про поваров — шесть вариантов первых экранов.
+   tokens.css пока пуст — значения сняты с макета Figma «Главная» (узел 4544:5756, 26.10.26).
+   Шрифт — только Golos Text (пользователь, 27.10.26). */
+:root{
+  --ink2:#1c201d; --g:#a1a6a1; --green:#1daa47; --bg-contrast:#f4f4f4;
+  --font:"Golos Text",Arial,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{display:flex;flex-direction:column;height:100vh;height:100dvh;font:400 14px/20px var(--font);color:var(--ink2);background:#e5e5ea}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+img{display:block}
+svg{display:block;flex:none}
+h3,h4,p{margin:0}
+
+/* ---------- переключатель вариантов (не часть интерфейса) ---------- */
+.variants{flex:none;width:100%;max-width:500px;margin:0 auto;background:#e5e5ea;padding:6px 0}
+.variants-tabs{display:flex;gap:4px;overflow-x:auto;padding:0 12px;scrollbar-width:none}
+.variants-tabs::-webkit-scrollbar{display:none}
+.vtab{flex:none;padding:5px 9px;border-radius:8px;background:transparent;color:#8a8f8a;font:400 13px/18px var(--font);white-space:nowrap}
+.vtab b{font-weight:500;margin-right:4px}
+.vtab.on{background:rgb(255 255 255 / .7);color:#4a4f4a}
+
+/* ---------- приложение ---------- */
+.app{flex:1;min-height:0;width:100%;max-width:500px;margin:0 auto;display:flex;flex-direction:column;position:relative;overflow:hidden;background:#fff}
+.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.scr{min-height:100%;padding:8px 0 28px}
+.scr[hidden]{display:none}
+
+/* ---------- варианты ---------- */
+.mt { display: flex; align-items: center; gap: 4px; color: var(--g); font-size: 12px; line-height: 15px; white-space: nowrap; }
+.rt { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; line-height: 15px; color: var(--green); white-space: nowrap; }
+.rt svg { margin-right: 1px; }
+.rt.pill { color: var(--ink2); background: #fff1d6; padding: 3px 8px; border-radius: 6px; font-weight: 500; }
+.rt.pill .rt-n { color: #6b6f6b; font-weight: 400; }
+.face { position: relative; display: block; flex: none; border-radius: 50%; overflow: hidden; background: #ddd; }
+.face img { position: absolute; max-width: none; object-fit: cover; }
+.face.ring { box-shadow: 0 0 0 3px #fff; }
+.addr { display: flex; align-items: center; gap: 6px; font-size: 15px; line-height: 21px; }
+.srch { display: flex; align-items: center; gap: 10px; height: 48px; margin: 0 16px; padding: 0 16px; border-radius: 16px; background: #fff; color: var(--g); font-size: 15px; }
+.chips { display: flex; gap: 8px; padding: 0 16px; margin: 16px 0; overflow: hidden; }
+.chip { flex: none; height: 36px; padding: 0 14px; display: flex; align-items: center; border-radius: 12px; background: #fff; font-size: 15px; }
+.chip.on { background: var(--green); color: #fff; }
+.chip.dark { background: var(--ink2); color: #fff; }
+
+/* 1 */
+.v1-card { margin: 0 16px 12px; padding: 16px; border-radius: 16px; background: #fff; }
+.v1-row { display: flex; align-items: center; gap: 12px; }
+.v1-who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.v1-who b { font-weight: 600; font-size: 15px; line-height: 21px; }
+.v1-dishes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.v1-dishes img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
+.v1-more { display: flex; align-items: center; gap: 6px; margin-top: 12px; color: var(--green); font-size: 14px; font-weight: 500; }
+
+/* 2 */
+.v2-head { text-align: center; padding: 10px 16px 6px; }
+.v2-head .addr { justify-content: center; font-size: 14px; color: #555; }
+.v2-logo { font: 800 22px/28px "Golos Text", sans-serif; letter-spacing: .32em; margin: 4px 0 6px; padding-left: .32em; }
+.v2-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 14px 16px 0; }
+.v2-tile { display: flex; flex-direction: column; gap: 6px; font-size: 12px; line-height: 15px; text-align: center; }
+.v2-tile img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px; }
+.v2-card { margin: 0 0 24px; }
+.v2-gal { display: flex; gap: 8px; padding: 0 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; scrollbar-width: none; }
+.v2-gal::-webkit-scrollbar { display: none; }
+.v2-gal img { flex: none; width: 300px; height: 220px; object-fit: cover; border-radius: 16px; scroll-snap-align: start; }
+.v2-who { display: flex; align-items: center; gap: 12px; margin-top: -26px; padding-left: 30px; position: relative; }
+.v2-who > div { margin-top: 26px; display: flex; flex-direction: column; gap: 3px; }
+.v2-who b { font: 700 17px/22px "Golos Text", sans-serif; }
+
+/* 3 */
+.v3-head { padding: 10px 16px 0; }
+.v3-head h3 { margin: 18px 0 0; font: 800 30px/34px "Golos Text", sans-serif; letter-spacing: -.01em; }
+.v3-card { margin: 0 16px 44px; }
+.v3-photo { position: relative; height: 300px; border-radius: 18px; overflow: hidden; }
+.v3-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.v3-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 16px 16px; background: linear-gradient(transparent, rgb(0 0 0 / .62)); color: #fff; display: flex; flex-direction: column; gap: 4px; }
+.v3-cap b { font: 800 22px/26px "Golos Text", sans-serif; }
+.v3-cap span { display: flex; align-items: center; gap: 4px; font-size: 13px; opacity: .92; }
+.v3-dishes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+.v3-dishes img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+
+/* 4 */
+.v4-title { padding: 18px 16px 0; }
+.v4-title h3 { margin: 0; font: 800 28px/32px "Golos Text", sans-serif; color: #3b0f22; color: var(--ink2); }
+.v4-title p { margin: 8px 0 0; font-size: 15px; line-height: 21px; color: #555; }
+.v4-rail { display: flex; gap: 12px; padding: 18px 16px 4px; overflow: hidden; }
+.v4-card { flex: none; width: 290px; border-radius: 16px; background: #fff; box-shadow: 0 2px 14px rgb(0 0 0 / .07); overflow: hidden; }
+.v4-photo { position: relative; height: 200px; }
+.v4-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+.v4-badge { position: absolute; right: 0; top: 0; display: flex; align-items: center; gap: 4px; padding: 6px 10px; border-bottom-left-radius: 12px; background: #fff; font-size: 12px; font-weight: 600; }
+.v4-plates { display: flex; justify-content: space-between; padding: 0 12px; margin-top: -46px; position: relative; }
+.v4-plates span { width: 82px; height: 82px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 4px #fff, 0 6px 14px rgb(0 0 0 / .18); }
+.v4-plates img { width: 100%; height: 100%; object-fit: cover; }
+.v4-body { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.v4-body b { font: 800 20px/26px "Golos Text", sans-serif; }
+.v4-body p { margin: 2px 0 0; font-size: 14px; line-height: 20px; color: #555; }
+.v4-btn { display: flex; justify-content: center; align-items: center; gap: 8px; height: 50px; margin: 14px 16px 0; border-radius: 14px; background: var(--green); color: #fff; font-weight: 600; font-size: 16px; }
+.v4-h { margin: 30px 16px 12px; font: 800 20px/28px "Golos Text", sans-serif; }
+.v4-row { display: flex; align-items: center; gap: 12px; margin: 0 16px 10px; padding: 8px 12px 8px 8px; border-radius: 16px; background: #fff; box-shadow: 0 2px 14px rgb(0 0 0 / .06); }
+.v4-dish { width: 108px; height: 108px; border-radius: 12px; object-fit: cover; flex: none; }
+.v4-rw { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.v4-rw b { font-weight: 600; font-size: 15px; line-height: 19px; }
+
+/* 5 */
+.v5-faces { display: flex; gap: 14px; padding: 18px 16px 6px; overflow: hidden; }
+.v5-f { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: none; }
+.v5-f .face { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--green); }
+.v5-f i { font-style: normal; font-size: 12px; line-height: 15px; }
+.v5-h { display: flex; justify-content: space-between; align-items: baseline; margin: 22px 16px 12px; }
+.v5-h h4 { margin: 0; font: 800 20px/28px "Golos Text", sans-serif; }
+.v5-h span { color: var(--green); font-size: 15px; }
+.v5-rail { display: flex; gap: 12px; padding: 0 16px; overflow: hidden; }
+.v5-card { flex: none; width: 270px; border-radius: 16px; background: #fff; box-shadow: 0 2px 14px rgb(0 0 0 / .08); overflow: hidden; }
+.v5-photo { position: relative; height: 180px; }
+.v5-photo img { width: 100%; height: 100%; object-fit: cover; }
+.v5-face { position: absolute; right: 14px; bottom: -30px; }
+.v5-body { padding: 12px 16px 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.v5-body b { font-weight: 600; font-size: 17px; line-height: 22px; max-width: 170px; }
+
+/* 6 */
+.v6-cover { position: relative; height: 520px; margin-top: 16px; }
+.v6-cover > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.v6-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgb(0 0 0 / .35), transparent 22%, transparent 45%, rgb(0 0 0 / .72)); }
+.v6-cap { position: absolute; left: 20px; right: 20px; bottom: 22px; z-index: 1; color: #fff; }
+.v6-kick { display: inline-block; padding: 4px 10px; border-radius: 99px; background: var(--green); font-size: 12px; font-weight: 600; }
+.v6-cap h3 { margin: 12px 0 8px; font: 800 44px/44px "Golos Text", sans-serif; letter-spacing: -.02em; }
+.v6-cap p { margin: 0; font-size: 15px; line-height: 21px; opacity: .92; }
+.v6-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 16px 0; }
+.v6-strip img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
+.v6-btn { display: flex; justify-content: center; align-items: center; height: 50px; margin: 12px 16px 0; border-radius: 14px; background: var(--ink2); color: #fff; font-weight: 600; font-size: 15px; }
+.v6-h { margin: 34px 16px 14px; }
+.v6-h h4 { margin: 0; font: 800 24px/30px "Golos Text", sans-serif; }
+.v6-h span { color: var(--g); font-size: 14px; }
+.v6-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 10px; padding: 0 16px; }
+.v6-p { display: flex; flex-direction: column; gap: 4px; }
+.v6-p img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 20%; border-radius: 14px; margin-bottom: 4px; }
+.v6-p b { font-weight: 600; font-size: 15px; line-height: 19px; }
+
+/* нижний таббар — компонент design-system/components/tab-bar.css, здесь только место в колонке */
+.app > .tab-bar{flex:none;position:relative;z-index:8}
+
+/* ленты листаются пальцем */
+.chips,.v4-rail,.v5-rail,.v5-faces{overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding:0 16px}
+.chips::-webkit-scrollbar,.v4-rail::-webkit-scrollbar,.v5-rail::-webkit-scrollbar,.v5-faces::-webkit-scrollbar{display:none}
+.v4-card,.v5-card,.chip,.v5-f{scroll-snap-align:start}
+
+/* верх страницы как на проде: адрес, сториз, баннеры, поиск */
+.pt-addr { display: flex; justify-content: center; padding: 8px 16px 0; }
+.pt-stories { display: flex; gap: 8px; padding: 14px 16px 0; overflow-x: auto; scrollbar-width: none; }
+.pt-story { position: relative; flex: none; width: 92px; height: 92px; padding: 2px; border: 2px solid var(--green); border-radius: 24px; background: #fff; box-shadow: 0 4px 12px -5px rgb(20 24 31 / .08); }
+.pt-story img { width: 100%; height: 100%; object-fit: cover; border-radius: 19px; }
+.pt-story::after { content: ""; position: absolute; inset: 2px; border-radius: 19px; background: linear-gradient(transparent 35%, rgb(0 0 0 / .45)); }
+.pt-story i { position: absolute; left: 10px; right: 8px; bottom: 10px; z-index: 1; font: normal 700 12px/16px var(--font); color: #fff; }
+.pt-banners { display: flex; gap: 16px; padding: 16px 16px 0; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; scroll-padding: 0 16px; }
+.pt-banners img { flex: none; width: 308px; height: 136px; object-fit: cover; border-radius: 16px; scroll-snap-align: start; }
+.pt-stories::-webkit-scrollbar, .pt-banners::-webkit-scrollbar { display: none; }
+.pt-srch { margin-top: 16px; }
+
+/* белые фильтры и поиск на белом фоне — на подложке bg-contrast */
+.scr.light .chip:not(.on):not(.dark), .scr.light .srch { background: var(--bg-contrast); }
+
+/* ценовой сегмент ₽₽₽: активные — цветом текста, остальные — серым, как на проде */
+.pl { display: inline-flex; font-size: 12px; line-height: 15px; letter-spacing: .02em; }
+.pl span { display: inline; font: 400 12px/15px var(--font); }
+.pl .pl-on { color: var(--ink2); }
+.pl .pl-off { color: var(--g); }
+.dot { color: var(--g); margin: 0 2px; }
+.v3-cap .pl .pl-on, .v6-seg .pl .pl-on { color: #fff; }
+.v3-cap .pl .pl-off, .v6-seg .pl .pl-off { color: rgb(255 255 255 / .45); }
+.v3-cap .dot { color: rgb(255 255 255 / .7); }
+.v6-seg { display: block; margin-top: 8px; }
+.v6-seg .pl span { font-size: 15px; line-height: 20px; }
+
+/* ---------- 1: верх в стиле Самоката (28.10.26) ---------- */
+.scr[data-screen="1"] { padding-top: 0; }
+.sk-hero { position: relative; height: 440px; background: #1c2430; color: #fff; }
+.sk-addr { position: absolute; z-index: 2; top: 14px; left: 16px; display: flex; align-items: center; gap: 4px; font-size: 17px; line-height: 22px; font-weight: 600; text-shadow: 0 1px 8px rgb(0 0 0 / .3); pointer-events: none; }
+.sk-slides { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.sk-slides::-webkit-scrollbar { display: none; }
+.sk-slide { position: relative; flex: none; width: 100%; height: 100%; scroll-snap-align: start; }
+.sk-slide img { width: 100%; height: 100%; object-fit: cover; }
+.sk-slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgb(0 0 0 / .35), transparent 22%, transparent 45%, rgb(0 0 0 / .62) 88%); }
+.sk-txt { position: absolute; z-index: 1; left: 16px; right: 16px; bottom: 60px; }
+.sk-txt h2 { margin: 0; max-width: 300px; font-size: 26px; line-height: 30px; font-weight: 700; letter-spacing: -.01em; }
+.sk-txt p { margin-top: 6px; font-size: 14px; line-height: 19px; color: rgb(255 255 255 / .85); }
+.sk-btn { display: inline-flex; align-items: center; height: 36px; margin-top: 14px; padding: 0 16px; border-radius: 18px; background: #fff; color: var(--ink2); font-size: 14px; font-weight: 600; }
+.sk-dots { position: absolute; z-index: 2; left: 0; right: 0; bottom: 36px; display: flex; justify-content: center; gap: 5px; pointer-events: none; }
+.sk-dots i { width: 6px; height: 6px; border-radius: 3px; background: rgb(255 255 255 / .45); transition: width .2s, background .2s; }
+.sk-dots i.on { width: 18px; background: #fff; }
+.sk-sheet { position: relative; z-index: 3; margin-top: -24px; padding: 22px 0 16px; border-radius: 24px; background: #fff; }
+.sk-stories { display: flex; gap: 4px; padding: 0 12px; overflow-x: auto; scrollbar-width: none; }
+.sk-stories::-webkit-scrollbar { display: none; }
+.sk-story { flex: none; width: 76px; display: flex; flex-direction: column; align-items: center; }
+.sk-blob { position: relative; width: 68px; height: 68px; margin-top: 8px; border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%; display: grid; place-items: center; }
+.sk-story:nth-child(1) .sk-blob { background: #e2f3e6; }
+.sk-story:nth-child(2) .sk-blob { background: #fde8d7; }
+.sk-story:nth-child(3) .sk-blob { background: #ebe6fa; }
+.sk-story:nth-child(4) .sk-blob { background: #e0edfa; }
+.sk-story:nth-child(5) .sk-blob { background: #fbf1cc; }
+.sk-story.bust img { position: absolute; left: 50%; bottom: 0; width: 82px; max-width: none; transform: translateX(-50%); clip-path: inset(-40px -20px 0 -20px round 0 0 30px 30px); }
+.sk-story.plate img { position: absolute; left: 50%; top: -8px; width: 70px; transform: translateX(-50%); filter: drop-shadow(0 4px 6px rgb(20 24 31 / .18)); }
+.sk-story i { margin-top: 8px; font-style: normal; font-size: 12px; line-height: 15px; text-align: center; }
+.sk-srch { margin-top: 18px; background: var(--bg-contrast); }
+
+/* Фильтры с главной прода mypovar.ru/ekaterinburg (.filters-bar), снято 28.10.26. */
+.pf-bar { display: flex; gap: 8px; margin: 16px 0; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
+.pf-bar::-webkit-scrollbar { display: none; }
+/* Правка пользователя 28.10.26: без тени, скругление и отступы больше (12 вместо 8, 16 вместо 12). */
+.pf { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; border-radius: 12px; background: #fff; color: var(--ink2); font-size: 15px; line-height: 21px; white-space: nowrap; }
+.pf svg { width: 24px; height: 24px; }
+.pf-sort svg { color: var(--green); }
+.pf.on { background: var(--green); color: #fff; }
+.pf-sort svg, .pf.on svg { margin-left: -4px; }
+.scr.light .pf:not(.on) { background: var(--bg-contrast); }
+.v6-h + .pf-bar { margin-top: 0; }
