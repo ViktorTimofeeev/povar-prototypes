@@ -68,8 +68,6 @@ h3,h4,p{margin:0}
 .v2-who b { font: 700 17px/22px "Golos Text", sans-serif; }
 
 /* 3 */
-.v3-head { padding: 10px 16px 0; }
-.v3-head h3 { margin: 18px 0 0; font: 800 30px/34px "Golos Text", sans-serif; letter-spacing: -.01em; }
 .v3-card { margin: 0 16px 44px; }
 .v3-photo { position: relative; height: 300px; border-radius: 18px; overflow: hidden; }
 .v3-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
@@ -102,10 +100,6 @@ h3,h4,p{margin:0}
 .v4-rw b { font-weight: 600; font-size: 15px; line-height: 19px; }
 
 /* 5 */
-.v5-faces { display: flex; gap: 14px; padding: 18px 16px 6px; overflow: hidden; }
-.v5-f { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: none; }
-.v5-f .face { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--green); }
-.v5-f i { font-style: normal; font-size: 12px; line-height: 15px; }
 .v5-h { display: flex; justify-content: space-between; align-items: baseline; margin: 22px 16px 12px; }
 .v5-h h4 { margin: 0; font: 800 20px/28px "Golos Text", sans-serif; }
 .v5-h span { color: var(--green); font-size: 15px; }
@@ -118,19 +112,6 @@ h3,h4,p{margin:0}
 .v5-body b { font-weight: 600; font-size: 17px; line-height: 22px; max-width: 170px; }
 
 /* 6 */
-.v6-cover { position: relative; height: 520px; margin-top: 16px; }
-.v6-cover > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-.v6-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgb(0 0 0 / .35), transparent 22%, transparent 45%, rgb(0 0 0 / .72)); }
-.v6-cap { position: absolute; left: 20px; right: 20px; bottom: 22px; z-index: 1; color: #fff; }
-.v6-kick { display: inline-block; padding: 4px 10px; border-radius: 99px; background: var(--green); font-size: 12px; font-weight: 600; }
-.v6-cap h3 { margin: 12px 0 8px; font: 800 44px/44px "Golos Text", sans-serif; letter-spacing: -.02em; }
-.v6-cap p { margin: 0; font-size: 15px; line-height: 21px; opacity: .92; }
-.v6-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 16px 0; }
-.v6-strip img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
-.v6-btn { display: flex; justify-content: center; align-items: center; height: 50px; margin: 12px 16px 0; border-radius: 14px; background: var(--ink2); color: #fff; font-weight: 600; font-size: 15px; }
-.v6-h { margin: 34px 16px 14px; }
-.v6-h h4 { margin: 0; font: 800 24px/30px "Golos Text", sans-serif; }
-.v6-h span { color: var(--g); font-size: 14px; }
 .v6-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 10px; padding: 0 16px; }
 .v6-p { display: flex; flex-direction: column; gap: 4px; }
 .v6-p img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 20%; border-radius: 14px; margin-bottom: 4px; }
@@ -140,9 +121,9 @@ h3,h4,p{margin:0}
 .app > .tab-bar{flex:none;position:relative;z-index:8}
 
 /* ленты листаются пальцем */
-.chips,.v4-rail,.v5-rail,.v5-faces{overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding:0 16px}
-.chips::-webkit-scrollbar,.v4-rail::-webkit-scrollbar,.v5-rail::-webkit-scrollbar,.v5-faces::-webkit-scrollbar{display:none}
-.v4-card,.v5-card,.chip,.v5-f{scroll-snap-align:start}
+.chips,.v4-rail,.v5-rail{overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding:0 16px}
+.chips::-webkit-scrollbar,.v4-rail::-webkit-scrollbar,.v5-rail::-webkit-scrollbar{display:none}
+.v4-card,.v5-card,.chip{scroll-snap-align:start}
 
 /* верх страницы как на проде: адрес, сториз, баннеры, поиск */
 .pt-addr { display: flex; justify-content: center; padding: 8px 16px 0; }
@@ -165,14 +146,12 @@ h3,h4,p{margin:0}
 .pl .pl-on { color: var(--ink2); }
 .pl .pl-off { color: var(--g); }
 .dot { color: var(--g); margin: 0 2px; }
-.v3-cap .pl .pl-on, .v6-seg .pl .pl-on { color: #fff; }
-.v3-cap .pl .pl-off, .v6-seg .pl .pl-off { color: rgb(255 255 255 / .45); }
+.v3-cap .pl .pl-on { color: #fff; }
+.v3-cap .pl .pl-off { color: rgb(255 255 255 / .45); }
 .v3-cap .dot { color: rgb(255 255 255 / .7); }
-.v6-seg { display: block; margin-top: 8px; }
-.v6-seg .pl span { font-size: 15px; line-height: 20px; }
 
 /* ---------- 1: верх в стиле Самоката (28.10.26) ---------- */
-.scr[data-screen="1"] { padding-top: 0; }
+.scr.sk { padding-top: 0; }
 .sk-hero { position: relative; height: 440px; background: #1c2430; color: #fff; }
 .sk-addr { position: absolute; z-index: 2; top: 14px; left: 16px; display: flex; align-items: center; gap: 4px; font-size: 17px; line-height: 22px; font-weight: 600; text-shadow: 0 1px 8px rgb(0 0 0 / .3); pointer-events: none; }
 .sk-slides { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
@@ -181,6 +160,7 @@ h3,h4,p{margin:0}
 .sk-slide img { width: 100%; height: 100%; object-fit: cover; }
 .sk-slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgb(0 0 0 / .35), transparent 22%, transparent 45%, rgb(0 0 0 / .62) 88%); }
 .sk-txt { position: absolute; z-index: 1; left: 16px; right: 16px; bottom: 60px; }
+.sk-kick { display: inline-block; margin-bottom: 10px; padding: 4px 10px; border-radius: 99px; background: var(--green); font-size: 12px; line-height: 16px; font-weight: 600; }
 .sk-txt h2 { margin: 0; max-width: 300px; font-size: 26px; line-height: 30px; font-weight: 700; letter-spacing: -.01em; }
 .sk-txt p { margin-top: 6px; font-size: 14px; line-height: 19px; color: rgb(255 255 255 / .85); }
 .sk-btn { display: inline-flex; align-items: center; height: 36px; margin-top: 14px; padding: 0 16px; border-radius: 18px; background: #fff; color: var(--ink2); font-size: 14px; font-weight: 600; }
@@ -212,4 +192,3 @@ h3,h4,p{margin:0}
 .pf.on { background: var(--green); color: #fff; }
 .pf-sort svg, .pf.on svg { margin-left: -4px; }
 .scr.light .pf:not(.on) { background: var(--bg-contrast); }
-.v6-h + .pf-bar { margin-top: 0; }
