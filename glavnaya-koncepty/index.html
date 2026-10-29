@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Главная: два концепта</title>
+<!-- Экраны выгружены из Figma «Главная», узлы 4573:27143 и 4573:27193 (2026-10-29). -->
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { min-height: 100vh; background: #e5e5ea; font: 400 14px/20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #222; }
+  .tabs { position: sticky; top: 0; z-index: 1; display: flex; justify-content: center; gap: 4px; padding: 8px 16px; background: #e5e5ea; }
+  .tab { padding: 6px 12px; border: 0; border-radius: 8px; background: transparent; color: #6b6b6b; font: inherit; cursor: pointer; white-space: nowrap; }
+  .tab b { margin-right: 4px; }
+  .tab.on { background: #fff; color: #222; }
+  .screen { display: block; width: 375px; max-width: 100%; height: auto; margin: 8px auto 32px; border-radius: 24px; background: #fff; }
+  .screen[hidden] { display: none; }
+  @media (max-width: 500px) { .screen { margin-top: 0; border-radius: 0; } }
+</style>
+</head>
+<body>
+<nav class="tabs">
+  <button class="tab" data-v="v1"><b>1</b>Повар и ряд блюд</button>
+  <button class="tab" data-v="v2"><b>2</b>Портрет повара</button>
+</nav>
+<img class="screen" id="v1" src="koncept-1.png?v=20261029" width="375" height="1183" alt="Концепт 1: повар в кружке и ряд крупных блюд">
+<img class="screen" id="v2" src="koncept-2.png?v=20261029" width="375" height="1183" alt="Концепт 2: портрет повара на кухне и ряд мелких блюд">
+<script>
+  function show() {
+    var v = location.hash.slice(1) === 'v2' ? 'v2' : 'v1';
+    document.querySelectorAll('.screen').forEach(function (s) { s.hidden = s.id !== v; });
+    document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('on', t.dataset.v === v); });
+  }
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.onclick = function () { location.hash = t.dataset.v; window.scrollTo(0, 0); };
+  });
+  window.addEventListener('hashchange', show);
+  show();
+</script>
+</body>
+</html>
