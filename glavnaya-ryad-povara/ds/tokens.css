@@ -1,0 +1,45 @@
+/*
+ * tokens.css — сгенерирован из tokens.json скриптом build-tokens.py. Руками не править.
+ * Правишь токен → правишь design-system/tokens.json → запускаешь build-tokens.py.
+ */
+
+:root {
+  /* color */
+  --color-text-and-icon: #1c201d;
+  --color-text-and-icon-on-dark: #ffffff;
+  --color-text-and-icon-mute: #a1a6a1;
+  --color-bg: #ffffff;
+  --color-bg-contrast: #f4f4f4;
+  --color-border: #e3e6e2;
+  --color-accent: #1daa47;
+  --color-accent-bg: #e7f5eb;
+  --color-accent-hover: #078b2e;
+  --color-error: #ff5748;
+  --color-error-hover: #ffd5d1;
+  --color-error-bg: #ffe6e4;
+
+  /* space: пусто */
+
+  /* radius */
+  --radius-default: 12px;
+  --radius-small: 8px;
+
+  /* font */
+  --font-family: "Golos Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-accent: "Yanone Kaffeesatz", "Golos Text", sans-serif;
+  --font-h2: 600 22px/28px var(--font-family);
+  --font-h3: 600 18px/22px var(--font-family);
+  --font-h4: 600 15px/21px var(--font-family);
+  --font-h5: 600 12px/15px var(--font-family);
+  --font-body: 400 15px/21px var(--font-family);
+  --font-caption: 400 12px/15px var(--font-family);
+  --font-h1-wow: 600 48px/42px var(--font-family-accent);
+  --font-h1-wow-tracking: -0.3px;
+  --font-h1-wow-case: uppercase;
+
+  /* size: пусто */
+
+  /* shadow: пусто */
+
+  /* breakpoint: пусто */
+}
