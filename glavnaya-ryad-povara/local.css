@@ -13,29 +13,33 @@ img { display: block; }
 .app > .tab-bar { flex: none; }
 
 /* баннер */
-/* В макете баннер 404 px, но видео крупнее картинки макета: при 404 тарелка заходит на заголовок.
-   431 px при ширине 375 — низ тарелки (305 px) на 12 px выше заголовка. Высота — пропорцией,
-   чтобы на широком экране видео не выросло на текст. */
-.banner { position: relative; aspect-ratio: 375 / 431; overflow: hidden; background: #d2d4d3; }
-/* Видео v8: тарелка с баблом в кадре выше, чем в v7. Сдвигаем вниз на 11 % высоты баннера —
-   центр тарелки и бабла (35 % высоты видео) встаёт посередине между адресом и заголовком,
-   низ видео совпадает с низом баннера. Верхний край растворяем в фоне, чтобы рукав не обрывался. */
-.banner video { position: absolute; top: 11%; left: 0; width: 100%; height: auto; -webkit-mask-image: linear-gradient(transparent, #000 56px); mask-image: linear-gradient(transparent, #000 56px); }
-.banner-top { position: absolute; inset: 0 0 auto; height: 100px; background: linear-gradient(#000, transparent); opacity: .3; }
-.banner-bottom { position: absolute; inset: auto 0 0; height: 128px; background: linear-gradient(rgba(84, 84, 84, 0), #545454); opacity: .6; -webkit-backdrop-filter: blur(32px); backdrop-filter: blur(32px);
+/* Стили — Figma «Главная», 4616:96355 (2026-10-30): адрес плашкой, заголовок Golos 22,
+   стрелка вместо «Смотреть всех», точки слева. Статус-бар не рисуем — плашка адреса на 16 px.
+   Баннер 404 px, как в макете. Иллюстрация — ровно между плашкой адреса (низ 56) и заголовком (262):
+   видео v8 — 96 % ширины от левого края (левее бабл обрезается, тарелка на 24 px правее центра), края растворены в фоне —
+   фон видео ровный rgb(211,212,214). В покое бабл на 4 px ниже плашки, тарелка на 10 px выше
+   заголовка; в прыжке бабл на мгновение заходит под плашку. */
+.banner { position: relative; aspect-ratio: 375 / 404; overflow: hidden; background: rgb(211, 212, 214); }
+.banner video { position: absolute; top: 4.5%; left: 0; width: 96%; height: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent), linear-gradient(transparent, #000 24px, #000 calc(100% - 24px), transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent), linear-gradient(transparent, #000 24px, #000 calc(100% - 24px), transparent);
+  mask-composite: intersect; }
+.banner-top { position: absolute; inset: 0 0 auto; height: 100px; background: linear-gradient(#000, transparent); opacity: .2; }
+.banner-bottom { position: absolute; inset: auto 0 0; height: 162px; background: linear-gradient(rgba(50, 50, 50, 0), #323232); opacity: .4; -webkit-backdrop-filter: blur(64px); backdrop-filter: blur(64px);
   /* у размытия в браузере жёсткая верхняя кромка — гасим её маской */
   -webkit-mask-image: linear-gradient(transparent, #000 50%); mask-image: linear-gradient(transparent, #000 50%); }
-.addr { position: absolute; top: 16px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 8px; font: var(--font-h4); color: var(--color-text-and-icon-on-dark); }
-.addr span { display: flex; align-items: center; gap: 4px; }
-.offer { position: absolute; left: 20px; right: 20px; bottom: 40px; display: flex; flex-direction: column; gap: 8px; color: var(--color-text-and-icon-on-dark); }
-.offer h1 { margin: 0; font: 600 32px/.85 var(--font-family-accent); letter-spacing: var(--font-h1-wow-tracking); text-transform: var(--font-h1-wow-case); }
-.offer p { font: var(--font-caption); }
-.offer-foot { display: flex; justify-content: space-between; align-items: flex-end; }
-.btn-light { display: flex; align-items: center; gap: 4px; padding: 4px 8px 4px 12px; border: 0; border-radius: var(--radius-small); background: var(--color-bg-contrast); font: var(--font-caption); color: var(--color-text-and-icon); cursor: pointer; }
+.addr { position: absolute; top: 16px; left: 16px; right: 20px; display: flex; justify-content: space-between; align-items: center; gap: 4px; height: 40px; padding: 8px; border-radius: var(--radius-default); background: var(--color-bg-contrast); font: var(--font-body); color: var(--color-text-and-icon); }
+.offer { position: absolute; left: 20px; right: 20px; bottom: 48px; display: flex; flex-direction: column; gap: 2px; color: var(--color-text-and-icon-on-dark); }
+.offer-t { display: flex; flex-direction: column; gap: 2px; }
+.offer h1 { margin: 0; font: var(--font-h2); letter-spacing: -0.3px; }
+/* подпись не заходит под кнопку со стрелкой справа (48 px + 8) */
+.offer p { padding-right: 56px; font: var(--font-body); }
+.offer-foot { display: flex; align-items: flex-end; height: 20px; padding-top: 12px; }
+.offer-go { position: absolute; right: 0; bottom: 0; display: flex; padding: 8px 12px; border: 0; border-radius: var(--radius-default); background: var(--color-bg-contrast); cursor: pointer; }
 .dots { display: flex; align-items: center; gap: 4px; }
-.dots i { width: 8px; height: 8px; border-radius: 4px; background: #fff; opacity: .6; }
-.dots i:nth-child(2) { opacity: .4; }
-.dots .on { position: relative; width: 24px; opacity: 1; background: rgba(255, 255, 255, .6); overflow: hidden; }
+.dots i { width: 8px; height: 8px; border-radius: 4px; background: #fff; opacity: .4; }
+.dots .on { position: relative; width: 24px; opacity: 1; background: rgba(255, 255, 255, .4); overflow: hidden; }
 .dots .on::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 14px; border-radius: 4px; background: rgba(255, 255, 255, .8); }
 
 /* белый лист с поиском и фильтрами */

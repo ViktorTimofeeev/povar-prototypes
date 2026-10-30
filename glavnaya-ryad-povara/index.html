@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
-<link rel="stylesheet" href="ds/tokens.css?v=202610301857">
-<link rel="stylesheet" href="ds/tab-bar.css?v=202610301857">
-<link rel="stylesheet" href="local.css?v=202610301857">
+<link rel="stylesheet" href="ds/tokens.css?v=202610302329">
+<link rel="stylesheet" href="ds/tab-bar.css?v=202610302329">
+<link rel="stylesheet" href="local.css?v=202610302329">
 </head>
 <body>
 <div class="app">
@@ -24,16 +24,14 @@
       <video src="img/banner.mp4?v=8" poster="img/banner-poster.jpg?v=8" autoplay muted loop playsinline preload="auto"></video>
       <div class="banner-top"></div>
       <div class="banner-bottom"></div>
-      <div class="addr"><img src="ic/map-location.svg" alt="" width="24" height="24"><span>г Тюмень, ул. Ленина, д 2а<img src="ic/chevron-down-24.svg" alt="" width="24" height="24"></span></div>
+      <div class="addr"><img src="ic/map-location-dark.svg" alt="" width="24" height="24">г Тюмень, ул. Ленина, д 2а<img src="ic/chevron-down-24-dark.svg" alt="" width="24" height="24"></div>
       <div class="offer">
-        <div>
+        <div class="offer-t">
           <h1>Проверенные повара</h1>
           <p>Готовят под заказ с учётом твоих пожеланий</p>
         </div>
-        <div class="offer-foot">
-          <button class="btn-light" type="button">Смотреть всех<img src="ic/chevron-right-16.svg" alt="" width="16" height="16"></button>
-          <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
-        </div>
+        <div class="offer-foot"><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+        <button class="offer-go" type="button" aria-label="Смотреть всех"><img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></button>
       </div>
     </section>
 
@@ -170,7 +168,7 @@
   </main>
   <nav class="tab-bar" data-active="home" data-cart="4"></nav>
 </div>
-<script src="ds/tab-bar.js?v=202610301857"></script>
+<script src="ds/tab-bar.js?v=202610302329"></script>
 <script>
   // Видео баннера. Safari не запускает его сам в режиме энергосбережения, при запрете
   // автовоспроизведения и с блокировщиками — тогда виден постер, а видео пойдёт с первого касания.
