@@ -57,14 +57,15 @@ img { display: block; }
 .meta { display: flex; align-items: center; gap: 4px; font: var(--font-caption); color: var(--color-text-and-icon-mute); white-space: nowrap; }
 .meta span { display: flex; gap: 4px; }
 .dishes { gap: 8px; padding: 0 16px; }
-.dishes > img { flex: none; width: 128px; height: 128px; border-radius: 12px; object-fit: cover; }
-.about { flex: none; display: flex; flex-direction: column; justify-content: space-between; width: 160px; height: 128px; padding: 8px 8px 12px; border-radius: 12px; background: var(--color-bg-contrast); font: var(--font-caption); }
+.dishes > img { flex: none; width: 136px; height: 136px; border-radius: 12px; object-fit: cover; }
+.about { flex: none; display: flex; flex-direction: column; justify-content: space-between; width: 160px; height: 136px; padding: 8px 8px 12px; border-radius: 12px; background: var(--color-bg-contrast); font: var(--font-caption); }
 .about-top { display: flex; align-items: center; gap: 2px; white-space: nowrap; }
 .about-top span { display: flex; gap: 2px; }
 .mute { color: var(--color-text-and-icon-mute); }
 
 /* как мы проверяем поваров */
-.check { position: relative; display: block; height: 72px; margin: 0 16px; border-radius: 12px; background: var(--color-accent); overflow: hidden; color: var(--color-text-and-icon-on-dark); text-decoration: none; }
+/* в макете у плашки отступ 16 сверху и снизу — вместе с промежутком 24 выходит 40 */
+.check { position: relative; display: block; height: 72px; margin: 16px; border-radius: 12px; background: var(--color-accent); overflow: hidden; color: var(--color-text-and-icon-on-dark); text-decoration: none; }
 .check .logo { position: absolute; left: 197px; top: -37px; width: 102px; height: 102px; clip-path: inset(37px 0 0); }
 .check b { position: absolute; left: 24px; top: 12px; width: 188px; font: var(--font-h3); }
 .check .go { position: absolute; right: 20px; top: 21px; }
