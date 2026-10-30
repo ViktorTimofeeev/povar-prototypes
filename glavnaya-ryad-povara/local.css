@@ -13,11 +13,8 @@ img { display: block; }
 .app > .tab-bar { flex: none; }
 
 /* баннер */
-/* В макете баннер 404 px, но видео крупнее картинки макета: при 404 тарелка заходит на заголовок.
-   428 px при ширине 375 — низ тарелки (305 px) на 12 px выше заголовка. Высота — пропорцией,
-   чтобы на широком экране видео не выросло на текст. */
-.banner { position: relative; aspect-ratio: 375 / 428; overflow: hidden; background: #d2d4d3; }
-.banner video { position: absolute; top: 0; left: 0; width: 100%; height: auto; }
+.banner { position: relative; height: 404px; overflow: hidden; background: #d2d4d3; }
+.banner video { position: absolute; top: 10px; left: 0; width: 100%; height: auto; }
 .banner-top { position: absolute; inset: 0 0 auto; height: 100px; background: linear-gradient(#000, transparent); opacity: .3; }
 .banner-bottom { position: absolute; inset: auto 0 0; height: 128px; background: linear-gradient(rgba(84, 84, 84, 0), #545454); opacity: .6; -webkit-backdrop-filter: blur(32px); backdrop-filter: blur(32px);
   /* у размытия в браузере жёсткая верхняя кромка — гасим её маской */
