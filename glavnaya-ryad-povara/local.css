@@ -44,11 +44,12 @@ img { display: block; }
 
 /* белый лист с поиском и фильтрами */
 .sheet { position: relative; margin-top: -24px; padding-top: 16px; border-radius: 24px 24px 0 0; background: var(--color-bg); }
-.search { display: flex; align-items: center; gap: 6px; margin: 0 16px; padding: 11px 19px 11px 15px; border: 1px solid var(--color-border); border-radius: var(--radius-default); color: var(--color-text-and-icon-mute); }
+/* Поиск и фильтры — Figma 4615:95951 (2026-10-31): без обводки, серая заливка bg-contrast */
+.search { display: flex; align-items: center; gap: 6px; margin: 0 16px; padding: 12px 20px 12px 16px; border-radius: var(--radius-default); background: var(--color-bg-contrast); color: var(--color-text-and-icon-mute); }
 .filters { gap: 8px; margin-top: 16px; padding: 0 16px; }
-.chip { flex: none; display: flex; align-items: center; gap: 4px; padding: 3px 11px 3px 7px; border: 1px solid var(--color-border); border-radius: var(--radius-small); background: none; font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; cursor: pointer; }
-.chip.icon { padding-right: 7px; }
-.chip.on { padding-right: 7px; border-color: var(--color-text-and-icon); background: var(--color-text-and-icon); color: var(--color-text-and-icon-on-dark); }
+.chip { flex: none; display: flex; align-items: center; gap: 4px; padding: 4px 12px 4px 8px; border: 0; border-radius: var(--radius-small); background: var(--color-bg-contrast); font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; cursor: pointer; }
+.chip.icon { padding-right: 8px; }
+.chip.on { padding-right: 8px; background: var(--color-text-and-icon); color: var(--color-text-and-icon-on-dark); }
 .chip .x { display: none; padding-left: 4px; }
 .chip.on .x { display: block; }
 
