@@ -78,18 +78,21 @@ img { display: block; }
 .vtab.on { background: var(--color-bg); color: var(--color-text-and-icon); }
 
 /* Вариант 2: карточка повара. Основа — Figma 4573:27193, но спокойнее и просторнее:
-   фото без затемнений и надписей поверх, имя и подписи — под фото шрифтами варианта 1,
-   три блюда на всю ширину, между поварами 40 px. */
+   фото без затемнений и надписей поверх, под ним вплотную три блюда — одна мозаика
+   (крайние углы 16, внутренние 4), имя и подписи — под мозаикой шрифтами варианта 1,
+   между поварами 40 px. */
 .cards { display: flex; flex-direction: column; gap: 40px; padding: 32px 16px 40px; }
 .cards .check { margin: 0; }
-.card { display: flex; flex-direction: column; gap: 12px; }
-.card-photo { position: relative; display: block; aspect-ratio: 343 / 220; border-radius: 16px; overflow: hidden; background: var(--color-bg-contrast); }
+.card { display: flex; flex-direction: column; gap: 4px; }
+.card-photo { position: relative; display: block; aspect-ratio: 343 / 220; border-radius: 16px 16px 4px 4px; overflow: hidden; background: var(--color-bg-contrast); }
 .card-photo > img { width: 100%; height: 100%; object-fit: cover; }
 .pill { position: absolute; left: 12px; top: 12px; display: flex; align-items: center; gap: 2px; padding: 4px 8px 4px 6px; border-radius: var(--radius-small); background: rgba(255, 255, 255, .85); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: var(--font-caption); color: var(--color-text-and-icon); }
 .pill i { margin: 0 4px; font-style: normal; color: var(--color-text-and-icon-mute); }
-.card-t { display: flex; flex-direction: column; gap: 4px; }
+.card-dishes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.card-dishes img { width: 100%; aspect-ratio: 1; border-radius: 4px; object-fit: cover; }
+.card-dishes img:first-child { border-bottom-left-radius: 16px; }
+.card-dishes img:last-child { border-bottom-right-radius: 16px; }
+.card-t { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
 .card-name { display: flex; align-items: center; gap: 2px; font: var(--font-h3); color: inherit; text-decoration: none; }
 .card-bio { font: var(--font-caption); color: var(--color-text-and-icon); }
 .card-t .meta { margin-top: 2px; }
-.card-dishes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.card-dishes img { width: 100%; aspect-ratio: 1; border-radius: 12px; object-fit: cover; }

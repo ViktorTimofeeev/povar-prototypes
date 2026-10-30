@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
-<link rel="stylesheet" href="ds/tokens.css?v=202610301634">
-<link rel="stylesheet" href="ds/tab-bar.css?v=202610301634">
-<link rel="stylesheet" href="local.css?v=202610301718">
+<link rel="stylesheet" href="ds/tokens.css?v=202610301719">
+<link rel="stylesheet" href="ds/tab-bar.css?v=202610301719">
+<link rel="stylesheet" href="local.css?v=202610301719">
 </head>
 <body>
 <div class="app">
@@ -21,7 +21,7 @@
   </nav>
   <main class="scroll">
     <section class="banner">
-      <video src="img/banner.mp4?v=7" poster="img/banner-poster.jpg?v=7" autoplay muted loop playsinline preload="auto"></video>
+      <video src="img/banner.mp4" poster="img/banner-poster.jpg" autoplay muted loop playsinline preload="auto"></video>
       <div class="banner-top"></div>
       <div class="banner-bottom"></div>
       <div class="addr"><img src="ic/map-location.svg" alt="" width="24" height="24"><span>г Тюмень, ул. Ленина, д 2а<img src="ic/chevron-down-24.svg" alt="" width="24" height="24"></span></div>
@@ -113,22 +113,22 @@
       </div>
 
       <!-- Вариант 2: карточка повара по Figma 4573:27193, спокойнее и воздушнее:
-           фото без затемнений, имя и подписи под фото, три блюда на всю ширину -->
+           фото без затемнений, под ним вплотную три блюда — один блок, имя и подписи ниже -->
       <div class="cards" data-variant="v2" hidden>
         <article class="card">
           <a class="card-photo" href="#">
             <img src="img/card-emelyanova.webp" alt="Елена Емельянова">
             <span class="pill"><img src="ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(384)</span><i>·</i>₽<span class="mute">₽₽</span></span>
           </a>
-          <div class="card-t">
-            <a class="card-name" href="#">Елена Емельянова<img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
-            <p class="card-bio">Профессиональный повар, стаж более 20 лет</p>
-            <span class="meta"><span><img src="ic/schedule-16.svg" alt="" width="16" height="16">28 октября с 11:00</span>·<span><img src="ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
-          </div>
           <div class="card-dishes">
             <img src="img/emelyanova-1.webp" alt="">
             <img src="img/emelyanova-2.webp" alt="">
             <img src="img/emelyanova-3.webp" alt="">
+          </div>
+          <div class="card-t">
+            <a class="card-name" href="#">Елена Емельянова<img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
+            <p class="card-bio">Профессиональный повар, стаж более 20 лет</p>
+            <span class="meta"><span><img src="ic/schedule-16.svg" alt="" width="16" height="16">28 октября с 11:00</span>·<span><img src="ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
           </div>
         </article>
 
@@ -137,15 +137,15 @@
             <img src="img/card-kozlov.webp" alt="Александр Козлов">
             <span class="pill"><img src="ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(240)</span><i>·</i>₽₽<span class="mute">₽</span></span>
           </a>
-          <div class="card-t">
-            <a class="card-name" href="#">Александр Козлов<img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
-            <p class="card-bio">Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
-            <span class="meta"><span><img src="ic/schedule-16.svg" alt="" width="16" height="16">Завтра с 11:00</span>·<span><img src="ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
-          </div>
           <div class="card-dishes">
             <img src="img/kozlov-1.webp" alt="">
             <img src="img/kozlov-2.webp" alt="">
             <img src="img/kozlov-3.webp" alt="">
+          </div>
+          <div class="card-t">
+            <a class="card-name" href="#">Александр Козлов<img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
+            <p class="card-bio">Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
+            <span class="meta"><span><img src="ic/schedule-16.svg" alt="" width="16" height="16">Завтра с 11:00</span>·<span><img src="ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
           </div>
         </article>
 
@@ -160,15 +160,15 @@
             <img src="img/card-sys.webp" alt="Денис Сыс">
             <span class="pill"><img src="ic/star-fill-16.svg" alt="" width="16" height="16">4.9<span class="mute">&nbsp;(274)</span><i>·</i>₽₽<span class="mute">₽</span></span>
           </a>
-          <div class="card-t">
-            <a class="card-name" href="#">Денис Сыс<img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
-            <p class="card-bio">Шеф-повар с 10-летним стажем и международным опытом</p>
-            <span class="meta"><span><img src="ic/schedule-16.svg" alt="" width="16" height="16">Сегодня с 21:00</span>·<span><img src="ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
-          </div>
           <div class="card-dishes">
             <img src="img/sys-1.webp" alt="">
             <img src="img/sys-2.webp" alt="">
             <img src="img/sys-3.webp" alt="">
+          </div>
+          <div class="card-t">
+            <a class="card-name" href="#">Денис Сыс<img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
+            <p class="card-bio">Шеф-повар с 10-летним стажем и международным опытом</p>
+            <span class="meta"><span><img src="ic/schedule-16.svg" alt="" width="16" height="16">Сегодня с 21:00</span>·<span><img src="ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
           </div>
         </article>
       </div>
@@ -176,7 +176,7 @@
   </main>
   <nav class="tab-bar" data-active="home" data-cart="4"></nav>
 </div>
-<script src="ds/tab-bar.js?v=202610301634"></script>
+<script src="ds/tab-bar.js?v=202610301719"></script>
 <script>
   // Видео баннера. Safari не запускает его сам в режиме энергосбережения, при запрете
   // автовоспроизведения и с блокировщиками — тогда виден постер, а видео пойдёт с первого касания.
