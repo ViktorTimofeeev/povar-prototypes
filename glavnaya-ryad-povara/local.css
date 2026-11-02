@@ -15,20 +15,15 @@ img { display: block; }
 /* баннер */
 /* Стили — Figma «Главная», 4616:96355 (2026-10-30): адрес плашкой, заголовок Golos 22,
    стрелка вместо «Смотреть всех», точки слева. Статус-бар не рисуем — плашка адреса на 16 px.
-   Баннер 404 px, как в макете. Иллюстрация — ровно между плашкой адреса (низ 56) и заголовком (262):
-   видео v8 — 96 % ширины от левого края (левее бабл обрезается, тарелка на 24 px правее центра), края растворены в фоне —
-   фон видео ровный rgb(211,212,214). В покое бабл на 4 px ниже плашки, тарелка на 10 px выше
-   заголовка; в прыжке бабл на мгновение заходит под плашку. */
-.banner { position: relative; aspect-ratio: 375 / 404; overflow: hidden; background: rgb(211, 212, 214); }
-.banner video { position: absolute; top: 4.5%; left: 0; width: 96%; height: auto;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent), linear-gradient(transparent, #000 24px, #000 calc(100% - 24px), transparent);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent), linear-gradient(transparent, #000 24px, #000 calc(100% - 24px), transparent);
-  mask-composite: intersect; }
+   Баннер 404 px, как в макете. Видео v12 (2026-11-02, tasks/10-2026-illyustracii-offerov) снято
+   в пропорции баннера 1000×1078 и заполняет его целиком, без масок и сдвигов: лицо и бабл на пике
+   выше заголовка на 320–500 px (проверка check-banner-v12.json). Композиция ниже на ~14px при 375px.
+   В самом видео нет нижнего градиента; единственное затемнение текста — .banner-bottom. */
+.banner { position: relative; aspect-ratio: 375 / 404; overflow: hidden; background: #cdd2d7; }
+.banner video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .banner-top { position: absolute; inset: 0 0 auto; height: 100px; background: linear-gradient(#000, transparent); opacity: .2; }
-.banner-bottom { position: absolute; inset: auto 0 0; height: 162px; background: linear-gradient(rgba(50, 50, 50, 0), #323232); opacity: .4; -webkit-backdrop-filter: blur(64px); backdrop-filter: blur(64px);
-  /* у размытия в браузере жёсткая верхняя кромка — гасим её маской */
-  -webkit-mask-image: linear-gradient(transparent, #000 50%); mask-image: linear-gradient(transparent, #000 50%); }
+.banner-bottom { position: absolute; inset: auto 0 0; height: 210px;
+  background: linear-gradient(rgba(28, 32, 29, 0), rgba(28, 32, 29, .72) 40%, rgba(28, 32, 29, .78)); }
 .addr { position: absolute; top: 16px; left: 16px; right: 20px; display: flex; justify-content: space-between; align-items: center; gap: 4px; height: 40px; padding: 8px; border-radius: var(--radius-default); background: var(--color-bg-contrast); font: var(--font-body); color: var(--color-text-and-icon); }
 .offer { position: absolute; left: 20px; right: 20px; bottom: 48px; display: flex; flex-direction: column; gap: 2px; color: var(--color-text-and-icon-on-dark); }
 .offer-t { display: flex; flex-direction: column; gap: 2px; }
