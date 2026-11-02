@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Главная: ряд повара</title>
-<!-- Концепт главной: Figma «Главная», кадры 4627:99303 и 4632:100122 (2026-11-02); прежние варианты — в arhiv/.
+<!-- Концепт главной: Figma «Главная», кадры 4627:99303 и 4632:100122 (2026-11-02); прежние варианты — в arhiv/ (из интерфейса убраны 2026-11-02).
      Верх по кадру 4609:38495 (2026-10-30). Данные поваров — с прода 26.10.26,
      koncept-ryad-povara/povara.json. Баннер — видео из tasks/10-2026-illyustracii-offerov. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,14 +12,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
 <link rel="stylesheet" href="ds/tokens.css?v=202610302329">
 <link rel="stylesheet" href="ds/tab-bar.css?v=202610302329">
-<link rel="stylesheet" href="local.css?v=2026110203">
+<link rel="stylesheet" href="local.css?v=2026110204">
 </head>
 <body>
 <div class="app">
   <nav class="variants">
     <button class="vtab" type="button" data-v="v3"><b>1</b>Одна карусель</button>
     <button class="vtab" type="button" data-v="v4"><b>2</b>Плашки под фото</button>
-    <a class="vtab" href="arhiv/index.html">Архив</a>
   </nav>
   <main class="scroll">
     <section class="banner">
@@ -46,7 +45,7 @@
         <button class="chip" type="button"><img src="ic/chef-hat.svg" alt="" width="24" height="24">Тип повара</button>
       </div>
 
-      <!-- Вариант «Одна карусель»: Figma 4627:99303 — сверху имя, рейтинг и сроки, ниже ряд: фото повара, три блюда, плашка с описанием; под рядом описание серым -->
+      <!-- Вариант «Одна карусель»: Figma 4627:99303 — сверху имя, рейтинг и сроки, ниже ряд: фото повара, три блюда, плашка с ценой и рейтингом; под рядом описание серым -->
       <div class="cooks" data-variant="v3">
         <article class="cook">
           <a class="cook-info" href="#">
@@ -60,7 +59,6 @@
             <img src="img/emelyanova-3.webp" alt="">
             <div class="about">
               <div class="about-top"><span>₽₽<span class="mute">₽</span></span>·<span><img src="ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(240)</span></span></div>
-              <p>Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
             </div>
           </div>
           <p class="cook-bio">Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
@@ -78,7 +76,6 @@
             <img src="img/sys-3.webp" alt="">
             <div class="about">
               <div class="about-top"><span>₽₽<span class="mute">₽</span></span>·<span><img src="ic/star-fill-16.svg" alt="" width="16" height="16">4.9<span class="mute">&nbsp;(274)</span></span></div>
-              <p>Шеф-повар с 10-летним стажем и международным опытом</p>
             </div>
           </div>
           <p class="cook-bio">Шеф-повар с 10-летним стажем и международным опытом</p>
@@ -93,7 +90,7 @@
         <article class="cook">
           <a class="cook-info" href="#">
             <span class="cook-row"><b>Елена Емельянова</b><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(384)</span></span></span>
-            <span class="cook-row mute"><span class="when">28 октября с 11:00 ·<img src="ic/delivery-24-mute.svg" alt="" width="24" height="24">От 540 ₽</span><span><span class="ink">₽</span>₽₽</span></span>
+            <span class="cook-row mute"><span class="when">Завтра с 11:00 ·<img src="ic/delivery-24-mute.svg" alt="" width="24" height="24">От 540 ₽</span><span><span class="ink">₽</span>₽₽</span></span>
           </a>
           <div class="dishes hs">
             <a class="cook-photo" href="#"><img src="img/av-emelyanova.webp" alt="Елена Емельянова"></a>
@@ -102,7 +99,6 @@
             <img src="img/kozlov-3.webp" alt="">
             <div class="about">
               <div class="about-top"><span>₽<span class="mute">₽₽</span></span>·<span><img src="ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(384)</span></span></div>
-              <p>Профессиональный повар, стаж более 20 лет</p>
             </div>
           </div>
           <p class="cook-bio">Профессиональный повар, стаж более 20 лет</p>
@@ -123,7 +119,6 @@
             <img src="img/emelyanova-3.webp" alt="">
             <div class="about">
               <div class="about-top"><span>₽₽<span class="mute">₽</span></span>·<span><img src="ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(240)</span></span></div>
-              <p>Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
             </div>
           </div>
           <div class="cook-tags">
@@ -145,7 +140,6 @@
             <img src="img/sys-3.webp" alt="">
             <div class="about">
               <div class="about-top"><span>₽₽<span class="mute">₽</span></span>·<span><img src="ic/star-fill-16.svg" alt="" width="16" height="16">4.9<span class="mute">&nbsp;(274)</span></span></div>
-              <p>Шеф-повар с 10-летним стажем и международным опытом</p>
             </div>
           </div>
           <div class="cook-tags">
@@ -173,12 +167,11 @@
             <img src="img/kozlov-3.webp" alt="">
             <div class="about">
               <div class="about-top"><span>₽<span class="mute">₽₽</span></span>·<span><img src="ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(384)</span></span></div>
-              <p>Профессиональный повар, стаж более 20 лет</p>
             </div>
           </div>
           <div class="cook-tags">
             <span class="tag"><span>₽<span class="mute">₽₽</span></span></span>
-            <span class="tag"><img src="ic/time-24.svg" alt="" width="24" height="24">28 октября с 11:00</span>
+            <span class="tag"><img src="ic/time-24.svg" alt="" width="24" height="24">Завтра с 11:00</span>
             <span class="tag"><img src="ic/delivery-24.svg" alt="" width="24" height="24">От 540 ₽</span>
           </div>
         </article>
