@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Главная: архив вариантов</title>
+<!-- Архив 2026-11-02: варианты 1–3 в том виде, в каком их показывали до перехода на два варианта
+     (Figma 4627:99303 и 4632:100122). Актуальная версия — ../index.html.
+     Концепт главной: Figma «Главная», кадр 4609:38495 (2026-10-30). Данные поваров — с прода 26.10.26,
+     koncept-ryad-povara/povara.json. Баннер — видео из tasks/10-2026-illyustracii-offerov. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
+<link rel="stylesheet" href="../ds/tokens.css?v=202610302329">
+<link rel="stylesheet" href="../ds/tab-bar.css?v=202610302329">
+<link rel="stylesheet" href="local.css?v=2026110203">
+</head>
+<body>
+<div class="app">
+  <nav class="variants">
+    <a class="vtab" href="../index.html">← Актуальные</a>
+    <button class="vtab" type="button" data-v="v1"><b>1</b>Ряд блюд</button>
+    <button class="vtab" type="button" data-v="v2"><b>2</b>Карточка повара</button>
+    <button class="vtab" type="button" data-v="v3"><b>3</b>Одна карусель</button>
+  </nav>
+  <main class="scroll">
+    <section class="banner">
+      <video src="../img/banner.mp4?v=8" poster="../img/banner-poster.jpg?v=8" autoplay muted loop playsinline preload="auto"></video>
+      <div class="banner-top"></div>
+      <div class="banner-bottom"></div>
+      <div class="addr"><img src="../ic/map-location-dark.svg" alt="" width="24" height="24">г Тюмень, ул. Ленина, д 2а<img src="../ic/chevron-down-24-dark.svg" alt="" width="24" height="24"></div>
+      <div class="offer">
+        <div class="offer-t">
+          <h1>Проверенные повара</h1>
+          <p>Готовят под заказ с учётом твоих пожеланий</p>
+        </div>
+        <div class="offer-foot"><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+        <button class="offer-go" type="button" aria-label="Смотреть всех"><img src="../ic/chevron-right-bold.svg" alt="" width="24" height="24"></button>
+      </div>
+    </section>
+
+    <section class="sheet">
+      <div class="search"><img src="../ic/search.svg" alt="" width="24" height="24">Повар или блюдо</div>
+      <div class="filters hs">
+        <button class="chip icon" type="button" aria-label="Сортировка"><img src="../ic/sort.svg" alt="" width="24" height="24"></button>
+        <button class="chip" type="button"><img src="../ic/ruble.svg" alt="" width="24" height="24">Цена</button>
+        <button class="chip on" type="button"><img src="../ic/time-white.svg" alt="" width="24" height="24">Время<img class="x" src="../ic/close-small-white.svg" alt="" width="24" height="24"></button>
+        <button class="chip" type="button"><img src="../ic/chef-hat.svg" alt="" width="24" height="24">Тип повара</button>
+      </div>
+
+      <!-- Вариант 1: Figma 4609:38495, повар в кружке и ряд крупных блюд -->
+      <div class="cooks" data-variant="v1">
+        <article class="cook">
+          <a class="cook-head" href="#">
+            <span class="ava"><img src="../img/av-kozlov.webp" alt=""></span>
+            <span class="cook-t">
+              <span class="cook-name">Александр Козлов<img src="../ic/chevron-right-bold.svg" alt="" width="24" height="24"></span>
+              <span class="meta"><span><img src="../ic/schedule-16.svg" alt="" width="16" height="16">Завтра с 11:00</span>·<span><img src="../ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
+            </span>
+          </a>
+          <div class="dishes hs">
+            <img src="../img/emelyanova-1.webp" alt="">
+            <img src="../img/emelyanova-2.webp" alt="">
+            <div class="about">
+              <div class="about-top"><span>₽₽<span class="mute">₽</span></span>·<span><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(240)</span></span></div>
+              <p>Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
+            </div>
+            <img src="../img/emelyanova-3.webp" alt="">
+          </div>
+        </article>
+
+        <article class="cook">
+          <a class="cook-head" href="#">
+            <span class="ava"><img src="../img/av-sys.webp" alt=""></span>
+            <span class="cook-t">
+              <span class="cook-name">Денис Сыс<img src="../ic/chevron-right-bold.svg" alt="" width="24" height="24"></span>
+              <span class="meta"><span><img src="../ic/schedule-16.svg" alt="" width="16" height="16">Сегодня с 21:00</span>·<span><img src="../ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
+            </span>
+          </a>
+          <div class="dishes hs">
+            <img src="../img/sys-1.webp" alt="">
+            <img src="../img/sys-2.webp" alt="">
+            <div class="about">
+              <div class="about-top"><span>₽₽<span class="mute">₽</span></span>·<span><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">4.9<span class="mute">&nbsp;(274)</span></span></div>
+              <p>Шеф-повар с 10-летним стажем и международным опытом</p>
+            </div>
+            <img src="../img/sys-3.webp" alt="">
+          </div>
+        </article>
+
+        <a class="check" href="#">
+          <img class="logo" src="../ic/logo-outline.svg" alt="">
+          <b>Как мы проверяем поваров</b>
+          <img class="go" src="../ic/chevron-right-bold-white.svg" alt="" width="24" height="24">
+        </a>
+
+        <article class="cook">
+          <a class="cook-head" href="#">
+            <span class="ava"><img src="../img/av-emelyanova.webp" alt=""></span>
+            <span class="cook-t">
+              <span class="cook-name">Елена Емельянова<img src="../ic/chevron-right-bold.svg" alt="" width="24" height="24"></span>
+              <span class="meta"><span><img src="../ic/schedule-16.svg" alt="" width="16" height="16">28 октября с 11:00</span>·<span><img src="../ic/delivery-16.svg" alt="" width="16" height="16">От 540 ₽</span></span>
+            </span>
+          </a>
+          <div class="dishes hs">
+            <img src="../img/kozlov-1.webp" alt="">
+            <img src="../img/kozlov-2.webp" alt="">
+            <div class="about">
+              <div class="about-top"><span>₽<span class="mute">₽₽</span></span>·<span><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(384)</span></span></div>
+              <p>Профессиональный повар, стаж более 20 лет</p>
+            </div>
+            <img src="../img/kozlov-3.webp" alt="">
+          </div>
+        </article>
+      </div>
+
+      <!-- Вариант 2: карточка повара по Figma 4573:27193, спокойнее и воздушнее:
+           фото без затемнений, под ним вплотную три блюда — один блок, имя и подписи ниже -->
+      <div class="cards" data-variant="v2" hidden>
+        <article class="card">
+          <a class="card-photo" href="#">
+            <img src="../img/card-kozlov.webp" alt="Александр Козлов">
+            <span class="pill"><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(240)</span><i>·</i>₽₽<span class="mute">₽</span></span>
+          </a>
+          <div class="card-dishes">
+            <img src="../img/emelyanova-1.webp" alt="">
+            <img src="../img/emelyanova-2.webp" alt="">
+            <img src="../img/emelyanova-3.webp" alt="">
+          </div>
+          <div class="card-tags"><span class="tag"><img src="../ic/time-24.svg" alt="" width="24" height="24">Завтра с 11:00</span><span class="tag"><img src="../ic/delivery-24.svg" alt="" width="24" height="24">От 540 ₽</span></div>
+          <a class="card-name" href="#">Александр Козлов<img src="../ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
+          <p class="card-bio">Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
+        </article>
+
+        <article class="card">
+          <a class="card-photo" href="#">
+            <img src="../img/card-sys.webp" alt="Денис Сыс">
+            <span class="pill"><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">4.9<span class="mute">&nbsp;(274)</span><i>·</i>₽₽<span class="mute">₽</span></span>
+          </a>
+          <div class="card-dishes">
+            <img src="../img/sys-1.webp" alt="">
+            <img src="../img/sys-2.webp" alt="">
+            <img src="../img/sys-3.webp" alt="">
+          </div>
+          <div class="card-tags"><span class="tag"><img src="../ic/time-24.svg" alt="" width="24" height="24">Сегодня с 21:00</span><span class="tag"><img src="../ic/delivery-24.svg" alt="" width="24" height="24">От 540 ₽</span></div>
+          <a class="card-name" href="#">Денис Сыс<img src="../ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
+          <p class="card-bio">Шеф-повар с 10-летним стажем и международным опытом</p>
+        </article>
+
+        <a class="check" href="#">
+          <img class="logo" src="../ic/logo-outline.svg" alt="">
+          <b>Как мы проверяем поваров</b>
+          <img class="go" src="../ic/chevron-right-bold-white.svg" alt="" width="24" height="24">
+        </a>
+
+        <article class="card">
+          <a class="card-photo" href="#">
+            <img src="../img/card-emelyanova.webp" alt="Елена Емельянова">
+            <span class="pill"><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(384)</span><i>·</i>₽<span class="mute">₽₽</span></span>
+          </a>
+          <div class="card-dishes">
+            <img src="../img/kozlov-1.webp" alt="">
+            <img src="../img/kozlov-2.webp" alt="">
+            <img src="../img/kozlov-3.webp" alt="">
+          </div>
+          <div class="card-tags"><span class="tag"><img src="../ic/time-24.svg" alt="" width="24" height="24">28 октября с 11:00</span><span class="tag"><img src="../ic/delivery-24.svg" alt="" width="24" height="24">От 540 ₽</span></div>
+          <a class="card-name" href="#">Елена Емельянова<img src="../ic/chevron-right-bold.svg" alt="" width="24" height="24"></a>
+          <p class="card-bio">Профессиональный повар, стаж более 20 лет</p>
+        </article>
+      </div>
+
+      <!-- Вариант 3: Figma 4625:98487, одна карусель — фото повара, три блюда, плашка с описанием; под ней строка с именем -->
+      <div class="cooks" data-variant="v3" hidden>
+        <article class="cook">
+          <div class="dishes hs">
+            <a class="cook-photo" href="#"><img src="../img/av-kozlov.webp" alt="Александр Козлов"></a>
+            <img src="../img/emelyanova-1.webp" alt="">
+            <img src="../img/emelyanova-2.webp" alt="">
+            <img src="../img/emelyanova-3.webp" alt="">
+            <div class="about">
+              <div class="about-top"><span>₽₽<span class="mute">₽</span></span>·<span><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(240)</span></span></div>
+              <p>Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
+            </div>
+          </div>
+          <a class="cook-info" href="#">
+            <span class="cook-row"><b>Александр Козлов</b><span class="rate"><img src="../ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(240)</span></span></span>
+            <span class="cook-row mute"><span class="when">Завтра с 11:00 ·<img src="../ic/delivery-24-mute.svg" alt="" width="24" height="24">От 540 ₽</span><span><span class="ink">₽₽</span>₽</span></span>
+          </a>
+        </article>
+
+        <article class="cook">
+          <div class="dishes hs">
+            <a class="cook-photo" href="#"><img src="../img/av-sys.webp" alt="Денис Сыс"></a>
+            <img src="../img/sys-1.webp" alt="">
+            <img src="../img/sys-2.webp" alt="">
+            <img src="../img/sys-3.webp" alt="">
+            <div class="about">
+              <div class="about-top"><span>₽₽<span class="mute">₽</span></span>·<span><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">4.9<span class="mute">&nbsp;(274)</span></span></div>
+              <p>Шеф-повар с 10-летним стажем и международным опытом</p>
+            </div>
+          </div>
+          <a class="cook-info" href="#">
+            <span class="cook-row"><b>Денис Сыс</b><span class="rate"><img src="../ic/star-fill-24.svg" alt="" width="24" height="24">4.9<span class="mute">&nbsp;(274)</span></span></span>
+            <span class="cook-row mute"><span class="when">Сегодня с 21:00 ·<img src="../ic/delivery-24-mute.svg" alt="" width="24" height="24">От 540 ₽</span><span><span class="ink">₽₽</span>₽</span></span>
+          </a>
+        </article>
+
+        <a class="check" href="#">
+          <img class="logo" src="../ic/logo-outline.svg" alt="">
+          <b>Как мы проверяем поваров</b>
+          <img class="go" src="../ic/chevron-right-bold-white.svg" alt="" width="24" height="24">
+        </a>
+
+        <article class="cook">
+          <div class="dishes hs">
+            <a class="cook-photo" href="#"><img src="../img/av-emelyanova.webp" alt="Елена Емельянова"></a>
+            <img src="../img/kozlov-1.webp" alt="">
+            <img src="../img/kozlov-2.webp" alt="">
+            <img src="../img/kozlov-3.webp" alt="">
+            <div class="about">
+              <div class="about-top"><span>₽<span class="mute">₽₽</span></span>·<span><img src="../ic/star-fill-16.svg" alt="" width="16" height="16">5.0<span class="mute">&nbsp;(384)</span></span></div>
+              <p>Профессиональный повар, стаж более 20 лет</p>
+            </div>
+          </div>
+          <a class="cook-info" href="#">
+            <span class="cook-row"><b>Елена Емельянова</b><span class="rate"><img src="../ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(384)</span></span></span>
+            <span class="cook-row mute"><span class="when">28 октября с 11:00 ·<img src="../ic/delivery-24-mute.svg" alt="" width="24" height="24">От 540 ₽</span><span><span class="ink">₽</span>₽₽</span></span>
+          </a>
+        </article>
+      </div>
+    </section>
+  </main>
+  <nav class="tab-bar" data-active="home" data-cart="4"></nav>
+</div>
+<script src="../ds/tab-bar.js?v=202610302329"></script>
+<script>
+  // Видео баннера. Safari не запускает его сам в режиме энергосбережения, при запрете
+  // автовоспроизведения и с блокировщиками — тогда виден постер, а видео пойдёт с первого касания.
+  (function () {
+    var v = document.querySelector('.banner video');
+    v.muted = true;
+    function start() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    start();
+    ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(function (e) {
+      document.addEventListener(e, start, { once: true, passive: true, capture: true });
+    });
+  })();
+  // Варианты: #v1 и #v2, общий верх, разные этажи с поварами
+  function showVariant() {
+    var v = location.hash === '#v2' ? 'v2' : location.hash === '#v3' ? 'v3' : 'v1';
+    document.querySelectorAll('[data-variant]').forEach(function (el) { el.hidden = el.dataset.variant !== v; });
+    document.querySelectorAll('.vtab').forEach(function (t) { t.classList.toggle('on', t.dataset.v === v); });
+  }
+  document.querySelectorAll('.vtab').forEach(function (t) {
+    t.addEventListener('click', function () { location.hash = t.dataset.v; });
+  });
+  window.addEventListener('hashchange', showVariant);
+  showVariant();
+  // Пока ссылок на экраны повара нет
+  document.querySelectorAll('a[href="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); });
+  });
+</script>
+</body>
+</html>
