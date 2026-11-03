@@ -4,25 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Главная: ряд повара</title>
-<!-- Концепт главной: Figma «Главная», кадры 4627:99303 и 4632:100122 (2026-11-02); прежние варианты — в arhiv/ (из интерфейса убраны 2026-11-02).
+<!-- Концепт главной: Figma «Главная», кадр 4627:99303 (2026-11-02). Вариант «Плашки под фото» (4632:100122) и переключатель
+     убраны 2026-11-03, они есть в коммите 731d653; прежние варианты — в arhiv/.
      Верх по кадру 4609:38495 (2026-10-30). Данные поваров — с прода 26.10.26,
-     koncept-ryad-povara/povara.json. Баннер — видео v12 из tasks/10-2026-illyustracii-offerov (chef-dialogue-v12.mp4, 2026-11-02). -->
+     koncept-ryad-povara/povara.json. Баннер — статичная картинка по кадру 4633:101047 (2026-11-03); до этого было видео v12 из tasks/10-2026-illyustracii-offerov. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
 <link rel="stylesheet" href="ds/tokens.css?v=202610302329">
 <link rel="stylesheet" href="ds/tab-bar.css?v=202610302329">
-<link rel="stylesheet" href="local.css?v=20261102chef12">
+<link rel="stylesheet" href="local.css?v=20261103grey">
 </head>
 <body>
 <div class="app">
-  <nav class="variants">
-    <button class="vtab" type="button" data-v="v3"><b>1</b>Одна карусель</button>
-    <button class="vtab" type="button" data-v="v4"><b>2</b>Плашки под фото</button>
-  </nav>
   <main class="scroll">
     <section class="banner">
-      <video src="img/banner-v12.mp4" poster="img/banner-poster-v12.jpg" autoplay muted loop playsinline preload="auto"></video>
+      <img class="banner-img" src="img/banner-static.jpg" alt="">
       <div class="banner-top"></div>
       <div class="banner-bottom"></div>
       <div class="addr"><img src="ic/map-location-dark.svg" alt="" width="24" height="24">г Тюмень, ул. Ленина, д 2а<img src="ic/chevron-down-24-dark.svg" alt="" width="24" height="24"></div>
@@ -45,8 +42,8 @@
         <button class="chip" type="button"><img src="ic/chef-hat.svg" alt="" width="24" height="24">Тип повара</button>
       </div>
 
-      <!-- Вариант «Одна карусель»: Figma 4627:99303 — сверху имя, рейтинг и сроки, ниже ряд: фото повара и три блюда (серая плашка в конце ряда убрана 2026-11-02); под рядом описание серым -->
-      <div class="cooks" data-variant="v3">
+      <!-- Повара, вариант «Одна карусель»: Figma 4627:99303 — сверху имя, рейтинг и сроки, ниже ряд: фото повара и три блюда (серая плашка в конце ряда убрана 2026-11-02); под рядом описание серым -->
+      <div class="cooks">
         <article class="cook">
           <a class="cook-info" href="#">
             <span class="cook-row"><b>Александр Козлов</b><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(240)</span></span></span>
@@ -95,98 +92,14 @@
           <p class="cook-bio">Профессиональный повар, стаж более 20 лет</p>
         </article>
       </div>
-
-      <!-- Вариант «Плашки под фото»: Figma 4632:100122 — сверху имя с рейтингом и описание, ниже тот же ряд, под ним цена, время и доставка плашками -->
-      <div class="cooks" data-variant="v4" hidden>
-        <article class="cook">
-          <a class="cook-top" href="#">
-            <span class="name-line"><b>Александр Козлов</b><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(240)</span></span></span>
-            <span class="cook-bio">Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</span>
-          </a>
-          <div class="dishes hs">
-            <a class="cook-photo" href="#"><img src="img/av-kozlov.webp" alt="Александр Козлов"></a>
-            <img src="img/emelyanova-1.webp" alt="">
-            <img src="img/emelyanova-2.webp" alt="">
-            <img src="img/emelyanova-3.webp" alt="">
-          </div>
-          <div class="cook-tags">
-            <span class="tag"><span>₽₽<span class="mute">₽</span></span></span>
-            <span class="tag"><img src="ic/time-24.svg" alt="" width="24" height="24">Завтра с 11:00</span>
-            <span class="tag"><img src="ic/delivery-24.svg" alt="" width="24" height="24">От 540 ₽</span>
-          </div>
-        </article>
-
-        <article class="cook">
-          <a class="cook-top" href="#">
-            <span class="name-line"><b>Денис Сыс</b><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">4.9<span class="mute">&nbsp;(274)</span></span></span>
-            <span class="cook-bio">Шеф-повар с 10-летним стажем и международным опытом</span>
-          </a>
-          <div class="dishes hs">
-            <a class="cook-photo" href="#"><img src="img/av-sys.webp" alt="Денис Сыс"></a>
-            <img src="img/sys-1.webp" alt="">
-            <img src="img/sys-2.webp" alt="">
-            <img src="img/sys-3.webp" alt="">
-          </div>
-          <div class="cook-tags">
-            <span class="tag"><span>₽₽<span class="mute">₽</span></span></span>
-            <span class="tag"><img src="ic/time-24.svg" alt="" width="24" height="24">Сегодня с 21:00</span>
-            <span class="tag"><img src="ic/delivery-24.svg" alt="" width="24" height="24">От 540 ₽</span>
-          </div>
-        </article>
-
-        <a class="check" href="#">
-          <img class="logo" src="ic/logo-outline.svg" alt="">
-          <b>Как мы проверяем поваров</b>
-          <img class="go" src="ic/chevron-right-bold-white.svg" alt="" width="24" height="24">
-        </a>
-
-        <article class="cook">
-          <a class="cook-top" href="#">
-            <span class="name-line"><b>Елена Емельянова</b><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(384)</span></span></span>
-            <span class="cook-bio">Профессиональный повар, стаж более 20 лет</span>
-          </a>
-          <div class="dishes hs">
-            <a class="cook-photo" href="#"><img src="img/av-emelyanova.webp" alt="Елена Емельянова"></a>
-            <img src="img/kozlov-1.webp" alt="">
-            <img src="img/kozlov-2.webp" alt="">
-            <img src="img/kozlov-3.webp" alt="">
-          </div>
-          <div class="cook-tags">
-            <span class="tag"><span>₽<span class="mute">₽₽</span></span></span>
-            <span class="tag"><img src="ic/time-24.svg" alt="" width="24" height="24">Завтра с 11:00</span>
-            <span class="tag"><img src="ic/delivery-24.svg" alt="" width="24" height="24">От 540 ₽</span>
-          </div>
-        </article>
-      </div>
     </section>
   </main>
   <nav class="tab-bar" data-active="home" data-cart="4"></nav>
 </div>
 <script src="ds/tab-bar.js?v=202610302329"></script>
 <script>
-  // Видео баннера. Safari не запускает его сам в режиме энергосбережения, при запрете
-  // автовоспроизведения и с блокировщиками — тогда виден постер, а видео пойдёт с первого касания.
-  (function () {
-    var v = document.querySelector('.banner video');
-    v.muted = true;
-    function start() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-    start();
-    ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(function (e) {
-      document.addEventListener(e, start, { once: true, passive: true, capture: true });
-    });
-  })();
-  // Варианты: #v3 и #v4, общий верх, разные этажи с поварами. Старые ссылки на #v1 и #v2 ведут в архив
+  // Остался один вариант, переключатель убран 2026-11-03. Старые ссылки на #v1 и #v2 ведут в архив
   if (location.hash === '#v1' || location.hash === '#v2') location.replace('arhiv/index.html' + location.hash);
-  function showVariant() {
-    var v = location.hash === '#v4' ? 'v4' : 'v3';
-    document.querySelectorAll('[data-variant]').forEach(function (el) { el.hidden = el.dataset.variant !== v; });
-    document.querySelectorAll('.vtab').forEach(function (t) { t.classList.toggle('on', t.dataset.v === v); });
-  }
-  document.querySelectorAll('button.vtab').forEach(function (t) {
-    t.addEventListener('click', function () { location.hash = t.dataset.v; });
-  });
-  window.addEventListener('hashchange', showVariant);
-  showVariant();
   // Пока ссылок на экраны повара нет
   document.querySelectorAll('a[href="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); });

@@ -1,5 +1,5 @@
 /* Главная: концепт «ряд повара». Свёрстан по Figma «Главная», кадр 4609:38495 (2026-10-30).
-   Размеры — из макета на 375 px. Картинка баннера заменена видео (просьба пользователя). */
+   Размеры — из макета на 375 px. Баннер — статичная картинка (2026-11-03). */
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
 body { background: #e5e5ea; font: var(--font-body); color: var(--color-text-and-icon); }
@@ -15,15 +15,16 @@ img { display: block; }
 /* баннер */
 /* Стили — Figma «Главная», 4616:96355 (2026-10-30): адрес плашкой, заголовок Golos 22,
    стрелка вместо «Смотреть всех», точки слева. Статус-бар не рисуем — плашка адреса на 16 px.
-   Баннер 404 px, как в макете. Видео v12 (2026-11-02, tasks/10-2026-illyustracii-offerov) снято
-   в пропорции баннера 1000×1078 и заполняет его целиком, без масок и сдвигов: лицо и бабл на пике
-   выше заголовка на 320–500 px (проверка check-banner-v12.json). Композиция ниже на ~14px при 375px.
-   В самом видео нет нижнего градиента; единственное затемнение текста — .banner-bottom. */
-.banner { position: relative; aspect-ratio: 375 / 404; overflow: hidden; background: #cdd2d7; }
-.banner video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+   Баннер 380 px, как в макете (2026-11-03 уменьшен на 24). Картинка — Figma 4633:101047 (2026-11-03): обложка 4633:101330
+   выгружена целиком (фон кухни, повар) в 3x и обрезана снизу по баннеру, 1125×1140 — ровно в пропорции баннера, поэтому
+   кадр одинаковый на любой ширине и лицо остаётся посередине. Затемнение снизу — по макету:
+   162 px, градиент #323232 с прозрачности 60 %, размытие фона 32. */
+.banner { position: relative; aspect-ratio: 375 / 380; overflow: hidden; background: #08111d; }
+.banner-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
 .banner-top { position: absolute; inset: 0 0 auto; height: 100px; background: linear-gradient(#000, transparent); opacity: .2; }
-.banner-bottom { position: absolute; inset: auto 0 0; height: 210px;
-  background: linear-gradient(rgba(28, 32, 29, 0), rgba(28, 32, 29, .72) 40%, rgba(28, 32, 29, .78)); }
+.banner-bottom { position: absolute; inset: auto 0 0; height: 162px; background: linear-gradient(rgba(50, 50, 50, 0), #323232); opacity: .6; -webkit-backdrop-filter: blur(32px); backdrop-filter: blur(32px);
+  /* у размытия в браузере жёсткая верхняя кромка — гасим её маской */
+  -webkit-mask-image: linear-gradient(transparent, #000 50%); mask-image: linear-gradient(transparent, #000 50%); }
 .addr { position: absolute; top: 16px; left: 16px; right: 20px; display: flex; justify-content: space-between; align-items: center; gap: 4px; height: 40px; padding: 8px; border-radius: var(--radius-default); background: var(--color-bg-contrast); font: var(--font-body); color: var(--color-text-and-icon); }
 .offer { position: absolute; left: 20px; right: 20px; bottom: 48px; display: flex; flex-direction: column; gap: 2px; color: var(--color-text-and-icon-on-dark); }
 .offer-t { display: flex; flex-direction: column; gap: 2px; }
@@ -58,20 +59,15 @@ img { display: block; }
 
 /* как мы проверяем поваров */
 /* между этажами 32 (по просьбе пользователя, в макете 24); у плашки сверху и снизу ещё 8 — выходит 40, как в макете */
-.check { position: relative; display: block; height: 72px; margin: 8px 16px; border-radius: 12px; background: var(--color-accent); overflow: hidden; color: var(--color-text-and-icon-on-dark); text-decoration: none; }
+/* серая плашка — Figma 4633:101047 (2026-11-03), было зелёным акцентом; токена для #444a46 нет */
+.check { position: relative; display: block; height: 72px; margin: 8px 16px; border-radius: 12px; background: #444a46; overflow: hidden; color: var(--color-text-and-icon-on-dark); text-decoration: none; }
 .check .logo { position: absolute; left: 197px; top: -37px; width: 102px; height: 102px; clip-path: inset(37px 0 0); }
 .check b { position: absolute; left: 24px; top: 12px; width: 188px; font: var(--font-h3); }
 .check .go { position: absolute; right: 20px; top: 21px; }
 
 [hidden] { display: none !important; }
 
-/* переключатель вариантов — вне макета, как в остальных прототипах */
-.variants { flex: none; display: flex; gap: 4px; padding: 6px 12px; background: #e5e5ea; overflow-x: auto; scrollbar-width: none; }
-.vtab { flex: none; text-decoration: none; padding: 5px 10px; border: 0; border-radius: 8px; background: none; font: 400 13px/18px var(--font-family); color: #6b6f6b; white-space: nowrap; cursor: pointer; }
-.vtab b { margin-right: 4px; font-weight: 600; }
-.vtab.on { background: var(--color-bg); color: var(--color-text-and-icon); }
-
-/* Общий ряд обоих вариантов: фото повара и три блюда, все 160×160. Серую плашку с описанием, ценой
+/* Ряд повара: фото повара и три блюда, все 160×160. Серую плашку с описанием, ценой
    и рейтингом в конце ряда убрали по просьбе пользователя (2026-11-02): всё это уже есть рядом с именем.
    Фото — тот же исходник, что у аватара, кадр из макета: 250×312 со сдвигом −57, −6. */
 .cook-photo { position: relative; flex: none; width: 160px; height: 160px; border-radius: 12px; overflow: hidden; }
@@ -79,7 +75,7 @@ img { display: block; }
 .rate { display: flex; align-items: center; gap: 4px; font: var(--font-body); }
 .rate .mute { margin-left: -4px; }
 .ink { color: var(--color-text-and-icon); }
-/* описание повара серым под рядом (вариант «Одна карусель») или под именем («Плашки под фото») */
+/* описание повара серым под рядом */
 .cook-bio { display: block; padding: 0 16px; font: var(--font-caption); color: var(--color-text-and-icon-mute); }
 
 /* Одна карусель — Figma 4627:99303 (2026-11-02): над рядом две строки на 343 — имя h3 и рейтинг
@@ -90,13 +86,3 @@ img { display: block; }
 .cook-row b { font: var(--font-h3); }
 .cook-row.mute { font: var(--font-body); }
 .when { display: flex; align-items: center; gap: 4px; font: var(--font-body); }
-
-/* Плашки под фото — Figma 4632:100122 (2026-11-02): над рядом имя h3 и рейтинг через 8, под ними
-   через 2 описание; под рядом цена, время и доставка серыми плашками через 4.
-   Длинная дата не влезает в строку — плашка доставки переносится, а не прячется. */
-.cook-top { display: flex; flex-direction: column; gap: 2px; padding: 0 16px; color: inherit; text-decoration: none; }
-.cook-top .cook-bio { padding: 0; }
-.name-line { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-.name-line b { font: var(--font-h3); }
-.cook-tags { display: flex; flex-wrap: wrap; gap: 4px; padding: 0 16px; }
-.tag { display: flex; align-items: center; gap: 4px; padding: 4px 12px 4px 8px; border-radius: var(--radius-small); background: var(--color-bg-contrast); font: var(--font-body); white-space: nowrap; }
