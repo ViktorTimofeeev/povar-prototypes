@@ -84,5 +84,7 @@ img { display: block; }
 .cook-info { display: flex; flex-direction: column; padding: 0 16px; color: inherit; text-decoration: none; }
 .cook-row { display: flex; justify-content: space-between; align-items: center; white-space: nowrap; }
 .cook-row b { font: var(--font-h3); }
+/* стрелка у имени — Figma 4637:101922 (2026-11-03): chevron-right-bold 24 через 4, по верху строки */
+.cook-name { display: flex; align-items: flex-start; gap: 4px; }
 .cook-row.mute { font: var(--font-body); }
 .when { display: flex; align-items: center; gap: 4px; font: var(--font-body); }
