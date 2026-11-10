@@ -13,16 +13,27 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
 <link rel="stylesheet" href="ds/tokens.css?v=202610302329">
 <link rel="stylesheet" href="ds/tab-bar.css?v=202610302329">
-<link rel="stylesheet" href="local.css?v=20261105w430">
+<link rel="stylesheet" href="local.css?v=20261110green">
 </head>
 <body>
 <div class="app">
+  <nav class="variants">
+    <button class="vtab" type="button" data-theme="white">Белый</button>
+    <button class="vtab" type="button" data-theme="green">Зелёный</button>
+  </nav>
+  <div class="screen">
+  <div class="addr"><img src="ic/map-location-dark.svg" alt="" width="24" height="24"><span>г Тюмень, ул. Ленина, д 2а</span><img src="ic/chevron-down-24-dark.svg" alt="" width="24" height="24"></div>
+  <div class="head-bg"></div>
+  <div class="head-cap" hidden></div>
   <main class="scroll">
-    <section class="banner">
+    <!-- Фото баннера стоит на месте, белый лист наезжает на него. Затемнение, текст, кнопка и точки едут с листом.
+         Адрес всегда на экране; серая шапка поднимается из-под листа и становится его фоном (Figma 4636:101626, кадры 1–5). -->
+    <div class="banner-photo">
       <img class="banner-img" src="img/banner-static.jpg" alt="">
       <div class="banner-top"></div>
+    </div>
+    <section class="banner">
       <div class="banner-bottom"></div>
-      <div class="addr"><img src="ic/map-location-dark.svg" alt="" width="24" height="24">г Тюмень, ул. Ленина, д 2а<img src="ic/chevron-down-24-dark.svg" alt="" width="24" height="24"></div>
       <div class="offer">
         <div class="offer-t">
           <h1>Проверенные повара</h1>
@@ -34,11 +45,18 @@
     </section>
 
     <section class="sheet">
+      <div class="stories hs">
+        <a class="story" href="#"><img src="img/story-1.webp?v=20261110" alt="" width="80" height="80">Отбор поваров</a>
+        <a class="story" href="#"><img src="img/story-2.webp" alt="" width="80" height="80">Плюсы сервиса</a>
+        <a class="story" href="#"><img src="img/story-3.webp" alt="" width="80" height="80">Наши ценности</a>
+        <a class="story" href="#"><img src="img/story-4.webp" alt="" width="80" height="80">Нужна помощь?</a>
+        <a class="story" href="#"><img src="img/story-5.svg" alt="" width="80" height="80">Стать поваром</a>
+      </div>
       <div class="search"><img src="ic/search.svg" alt="" width="24" height="24">Повар или блюдо</div>
       <div class="filters hs">
         <button class="chip icon" type="button" aria-label="Сортировка"><img src="ic/sort.svg" alt="" width="24" height="24"></button>
         <button class="chip" type="button"><img src="ic/ruble.svg" alt="" width="24" height="24">Цена</button>
-        <button class="chip on" type="button"><img src="ic/time-white.svg" alt="" width="24" height="24">Время<img class="x" src="ic/close-small-white.svg" alt="" width="24" height="24"></button>
+        <button class="chip on" type="button"><img src="ic/time-24.svg" alt="" width="24" height="24">Время<img class="x" src="ic/close-small.svg" alt="" width="24" height="24"></button>
         <button class="chip" type="button"><img src="ic/chef-hat.svg" alt="" width="24" height="24">Тип повара</button>
       </div>
 
@@ -72,12 +90,6 @@
           <p class="cook-bio">Шеф-повар с 10-летним стажем и международным опытом</p>
         </article>
 
-        <a class="check" href="#">
-          <img class="logo" src="ic/logo-outline.svg" alt="">
-          <b>Как мы проверяем поваров</b>
-          <img class="go" src="ic/chevron-right-bold-white.svg" alt="" width="24" height="24">
-        </a>
-
         <article class="cook">
           <a class="cook-info" href="#">
             <span class="cook-row"><span class="cook-name"><b>Елена Емельянова</b><img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></span><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(384)</span></span></span>
@@ -94,11 +106,52 @@
       </div>
     </section>
   </main>
+  </div>
   <nav class="tab-bar" data-active="home" data-cart="4"></nav>
 </div>
 <script src="ds/tab-bar.js?v=202610302329"></script>
 <script>
-  // Остался один вариант, переключатель убран 2026-11-03. Старые ссылки на #v1 и #v2 ведут в архив
+  // Шапка с адресом. Пока до адреса больше 24 px, серая шапка спрятана под белым листом. Лист проходит
+  // последние 20 px (край листа с 80 до 60 px от верха), а шапка за это же время поднимается с 80 до самого верха —
+  // быстрее листа. Дальше лист замирает под адресом, контент уходит под его скруглённый край (.head-cap).
+  (function () {
+    var sc = document.querySelector('.scroll'), sheet = document.querySelector('.sheet');
+    var bg = document.querySelector('.head-bg'), cap = document.querySelector('.head-cap');
+    var FROM = 80, TO = 60, R = 24, queued = false;
+    function update() {
+      queued = false;
+      var t = sheet.getBoundingClientRect().top - sc.getBoundingClientRect().top;
+      var p = Math.min(1, Math.max(0, (FROM - t) / (FROM - TO)));
+      bg.style.visibility = t >= FROM ? 'hidden' : 'visible';
+      bg.style.transform = 'translateY(' + (FROM * (1 - p)) + 'px)';
+      bg.style.borderRadius = (R * (1 - p)) + 'px ' + (R * (1 - p)) + 'px 0 0';
+      cap.hidden = t > TO;
+    }
+    sc.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+  // Табы «Белый» и «Зелёный» (2026-11-10): зелёный — Figma 4660:14499, тот же концепт, другие цвета.
+  // Цвета — переменными на .app, иконки и сторис с зашитыми цветами — из зелёных копий (ic-green/, img/story-green-*).
+  (function () {
+    var app = document.querySelector('.app');
+    function setTheme() {
+      var green = location.hash === '#green';
+      app.dataset.theme = green ? 'green' : 'white';
+      document.querySelectorAll('.screen img').forEach(function (img) {
+        if (!img.dataset.src) img.dataset.src = img.getAttribute('src');
+        var src = img.dataset.src;
+        img.setAttribute('src', green ? src.replace(/^ic\//, 'ic-green/').replace(/^img\/story-(\d)/, 'img/story-green-$1') : src);
+      });
+      document.querySelectorAll('.vtab').forEach(function (t) { t.classList.toggle('on', t.dataset.theme === app.dataset.theme); });
+    }
+    document.querySelectorAll('.vtab').forEach(function (t) {
+      t.addEventListener('click', function () { location.hash = t.dataset.theme === 'green' ? 'green' : ''; });
+    });
+    window.addEventListener('hashchange', setTheme);
+    setTheme();
+  })();
+  // Старые ссылки на #v1 и #v2 ведут в архив
   if (location.hash === '#v1' || location.hash === '#v2') location.replace('arhiv/index.html' + location.hash);
   // Пока ссылок на экраны повара нет
   document.querySelectorAll('a[href="#"]').forEach(function (a) {
