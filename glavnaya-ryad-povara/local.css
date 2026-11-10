@@ -3,6 +3,9 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
 body { background: #e5e5ea; font: var(--font-body); color: var(--color-text-and-icon); }
+/* На телефоне фон страницы — цвета шапки (его ставит скрипт, по нему браузер красит полосу с часами).
+   На широком экране по бокам от прототипа — серый, как раньше (2026-11-11). */
+@media (min-width: 431px) { html, body { background: #e5e5ea !important; } }
 p { margin: 0; }
 img { display: block; }
 .hs { display: flex; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
