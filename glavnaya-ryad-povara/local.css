@@ -27,24 +27,25 @@ img { display: block; }
 .banner-photo { position: sticky; top: 0; aspect-ratio: 375 / 380; overflow: hidden; background: #08111d; }
 .banner { position: relative; z-index: 1; aspect-ratio: 375 / 380; margin-top: calc(-100% * 380 / 375); }
 .banner-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+/* затемнение всего фото при прокрутке, плотность задаёт скрипт (до 50 %, 2026-11-11) */
+.banner-dim { position: absolute; inset: 0; background: #000; opacity: 0; }
 .banner-top { position: absolute; inset: 0 0 auto; height: 100px; background: linear-gradient(#000, transparent); opacity: .2; }
 .banner-bottom { position: absolute; inset: auto 0 0; height: 162px; background: linear-gradient(rgba(50, 50, 50, 0), #323232); opacity: .6; -webkit-backdrop-filter: blur(32px); backdrop-filter: blur(32px);
   /* у размытия в браузере жёсткая верхняя кромка — гасим её маской */
   -webkit-mask-image: linear-gradient(transparent, #000 50%); mask-image: linear-gradient(transparent, #000 50%); }
 /* Адрес — Figma 4636:101626 (2026-11-10): плашка по ширине текста, по центру, иконки через 8. Всегда на экране,
    поверх баннера и шапки. Статус-бар не рисуем, поэтому адрес на 16 px от верха (в макете под статус-баром). */
-.addr { position: absolute; top: 16px; left: 50%; z-index: 5; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; max-width: calc(100% - 32px); height: 40px; padding: 8px 12px; border-radius: var(--radius-default); background: var(--color-bg-contrast); font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; }
+.addr { position: absolute; top: 16px; left: 50%; z-index: 5; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; max-width: calc(100% - 32px); height: 40px; padding: 8px 12px; border-radius: var(--radius-default); background: var(--color-bg); font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; }
 .addr span { overflow: hidden; text-overflow: ellipsis; padding: 1px 0 2px; }
-/* Серая шапка: поднимается из-под листа, когда до адреса остаётся 24 px, и доходит до верха, когда лист встаёт
-   в 4 px под адресом (кадры 3–4). Положение и скругление задаёт скрипт. Лежит над баннером, под листом. */
-.head-bg { position: absolute; top: 0; left: 0; right: 0; z-index: 2; height: 240px; border-radius: 24px 24px 0 0; background: var(--color-bg-contrast); visibility: hidden; pointer-events: none; }
-/* Когда лист встал под адресом, его скруглённый край закреплён (кадр 5): серые 60 px сверху и серые уголки
-   за скруглением 24 — контент уходит прямо под край листа, без белой полосы. */
-.head-cap { position: absolute; top: 0; left: 0; right: 0; z-index: 4; height: 84px; pointer-events: none;
-  background:
-    linear-gradient(var(--color-bg-contrast), var(--color-bg-contrast)) 0 0 / 100% 60px no-repeat,
-    radial-gradient(circle at 100% 100%, transparent 23.5px, var(--color-bg-contrast) 24px) 0 100% / 24px 24px no-repeat,
-    radial-gradient(circle at 0 100%, transparent 23.5px, var(--color-bg-contrast) 24px) 100% 100% / 24px 24px no-repeat; }
+/* Белая шапка (была серой до 2026-11-11): поднимается из-под листа, когда до верха листа 112 px, и доходит до верха, когда лист встаёт
+   в 4 px под адресом (2026-11-11).
+   Положение и скругление задаёт скрипт. Лежит над баннером, под листом. */
+.head-bg { position: absolute; top: 0; left: 0; right: 0; z-index: 2; height: 240px; border-radius: 24px 24px 0 0; background: var(--color-bg); visibility: hidden; pointer-events: none; }
+/* Закреплённая шапка (Figma 4662:14940): белая панель на всю ширину под адресом, нижние углы скругляются до 24
+   и проявляется обводка 1 px снаружи --color-border (Figma 4662:16560, вместо тени) по мере прокрутки, контент уходит
+   под неё. Плотность обводки задаёт скрипт через --q. Белая, а не серая —
+   чтобы адрес не сливался с серыми полями и фильтрами. Полоса с часами того же цвета (theme-color). */
+.head-bar { --q: 0%; position: absolute; top: 0; left: 0; right: 0; z-index: 4; height: 60px; background: var(--color-bg); box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-border) var(--q), transparent); pointer-events: none; }
 .offer { position: absolute; left: 20px; right: 20px; bottom: 48px; display: flex; flex-direction: column; gap: 2px; color: var(--color-text-and-icon-on-dark); }
 .offer-t { display: flex; flex-direction: column; gap: 2px; }
 .offer h1 { margin: 0; font: var(--font-h2); letter-spacing: -0.3px; }
@@ -73,7 +74,8 @@ img { display: block; }
 .chip.icon { padding-right: 8px; }
 /* выбранный фильтр — белый с обводкой 1 px, Figma 4636:101626 (2026-11-10); было тёмной заливкой.
    Обводка рамкой, паддинги на 1 px меньше — размер тот же */
-.chip.on { padding: 3px 7px; border: 1px solid var(--color-text-and-icon); background: var(--color-bg); }
+/* обводка выбранного фильтра — --color-border (Figma 4662:16679, 2026-11-11), была цвета текста */
+.chip.on { padding: 3px 7px; border: 1px solid var(--color-border); background: var(--color-bg); }
 /* отступ крестика — полем, а не паддингом: с border-box паддинг сжимал картинку и крестик вытягивался */
 .chip .x { display: none; margin-left: 4px; }
 .chip.on .x { display: block; }
@@ -88,15 +90,12 @@ img { display: block; }
 
 [hidden] { display: none !important; }
 
-/* табы тем — вне макета, как в остальных прототипах */
-.variants { flex: none; display: flex; gap: 4px; padding: 6px 12px; background: #e5e5ea; overflow-x: auto; scrollbar-width: none; }
-.vtab { flex: none; padding: 5px 10px; border: 0; border-radius: 8px; background: none; font: 400 13px/18px var(--font-family); color: #6b6f6b; white-space: nowrap; cursor: pointer; }
-.vtab.on { background: #fff; color: #1c201d; }
 
 /* Зелёная тема — Figma 4660:14499 (2026-11-10): тот же концепт, заменены только цвета. Фон #f1f3ef, подложки #e4e7e3,
    текст и иконки #0e3c1a, серый текст #95a399, звёзды #f1b53b (в иконках). Выбранный фильтр — цвета подложки, не белый. */
 .app[data-theme="green"] { --color-bg: #f1f3ef; --color-bg-contrast: #e4e7e3; --color-text-and-icon: #0e3c1a; --color-text-and-icon-mute: #95a399; }
-.app[data-theme="green"] .chip.on { background: var(--color-bg-contrast); }
+/* в зелёной обводка остаётся тёмной: --color-border (#e3e6e2) не виден на подложке #e4e7e3 */
+.app[data-theme="green"] .chip.on { border-color: var(--color-text-and-icon); background: var(--color-bg-contrast); }
 
 /* Ряд повара: фото повара и три блюда, все 160×160. Серую плашку с описанием, ценой
    и рейтингом в конце ряда убрали по просьбе пользователя (2026-11-02): всё это уже есть рядом с именем.

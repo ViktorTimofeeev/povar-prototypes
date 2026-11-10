@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- полоса с часами и батареей — цвета шапки с адресом (2026-11-11); тема меняет его скриптом -->
+<meta name="theme-color" content="#ffffff">
 <title>Главная: ряд повара</title>
 <!-- Концепт главной: Figma «Главная», кадр 4627:99303 (2026-11-02). Вариант «Плашки под фото» (4632:100122) и переключатель
      убраны 2026-11-03, они есть в коммите 731d653; прежние варианты — в arhiv/.
@@ -13,23 +15,20 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
 <link rel="stylesheet" href="ds/tokens.css?v=202610302329">
 <link rel="stylesheet" href="ds/tab-bar.css?v=202610302329">
-<link rel="stylesheet" href="local.css?v=20261110green">
+<link rel="stylesheet" href="local.css?v=20261111chip">
 </head>
 <body>
 <div class="app">
-  <nav class="variants">
-    <button class="vtab" type="button" data-theme="white">Белый</button>
-    <button class="vtab" type="button" data-theme="green">Зелёный</button>
-  </nav>
   <div class="screen">
   <div class="addr"><img src="ic/map-location-dark.svg" alt="" width="24" height="24"><span>г Тюмень, ул. Ленина, д 2а</span><img src="ic/chevron-down-24-dark.svg" alt="" width="24" height="24"></div>
   <div class="head-bg"></div>
-  <div class="head-cap" hidden></div>
+  <div class="head-bar" hidden></div>
   <main class="scroll">
     <!-- Фото баннера стоит на месте, белый лист наезжает на него. Затемнение, текст, кнопка и точки едут с листом.
          Адрес всегда на экране; серая шапка поднимается из-под листа и становится его фоном (Figma 4636:101626, кадры 1–5). -->
     <div class="banner-photo">
       <img class="banner-img" src="img/banner-static.jpg" alt="">
+      <div class="banner-dim"></div>
       <div class="banner-top"></div>
     </div>
     <section class="banner">
@@ -111,43 +110,51 @@
 </div>
 <script src="ds/tab-bar.js?v=202610302329"></script>
 <script>
-  // Шапка с адресом. Пока до адреса больше 24 px, серая шапка спрятана под белым листом. Лист проходит
-  // последние 20 px (край листа с 80 до 60 px от верха), а шапка за это же время поднимается с 80 до самого верха —
-  // быстрее листа. Дальше лист замирает под адресом, контент уходит под его скруглённый край (.head-cap).
+  // Шапка с адресом (2026-11-11, Figma 4662:14940 и 4662:15257). Пока лист далеко, фото темнеет: чем ближе лист
+  // к адресу, тем темнее, до 50 %. Когда до верха листа остаётся 112 px, белая шапка поднимается из-под листа быстрее
+  // него — край листа будто ускоряется и закрывает фото — и доходит до верха, когда лист встаёт в 4 px под адресом
+  // (60 px). Дальше шапка закреплена: белая панель высотой 60 px над контентом, контент уходит под неё. За следующие
+  // 24 px прокрутки её нижние углы скругляются до 24 и проявляется обводка (Figma 4662:16560); скругление верха листа под ней уходит в ноль.
   (function () {
     var sc = document.querySelector('.scroll'), sheet = document.querySelector('.sheet');
-    var bg = document.querySelector('.head-bg'), cap = document.querySelector('.head-cap');
-    var FROM = 80, TO = 60, R = 24, queued = false;
+    var bg = document.querySelector('.head-bg'), bar = document.querySelector('.head-bar'), dim = document.querySelector('.banner-dim');
+    var FROM = 112, TO = 60, R = 24, DIM = .5, start = null, queued = false;
     function update() {
       queued = false;
       var t = sheet.getBoundingClientRect().top - sc.getBoundingClientRect().top;
+      if (start === null || sc.scrollTop === 0) start = t + sc.scrollTop;
+      dim.style.opacity = DIM * Math.min(1, Math.max(0, (start - t) / (start - FROM)));
       var p = Math.min(1, Math.max(0, (FROM - t) / (FROM - TO)));
-      bg.style.visibility = t >= FROM ? 'hidden' : 'visible';
+      var q = Math.min(1, Math.max(0, (TO - t) / R));
+      bg.style.visibility = t >= FROM || q === 1 ? 'hidden' : 'visible';
       bg.style.transform = 'translateY(' + (FROM * (1 - p)) + 'px)';
       bg.style.borderRadius = (R * (1 - p)) + 'px ' + (R * (1 - p)) + 'px 0 0';
-      cap.hidden = t > TO;
+      bar.hidden = t > TO;
+      bar.style.borderRadius = '0 0 ' + (R * q) + 'px ' + (R * q) + 'px';
+      bar.style.setProperty('--q', (q * 100).toFixed(1) + '%');
+      sheet.style.borderRadius = (R * (1 - q)) + 'px ' + (R * (1 - q)) + 'px 0 0';
     }
     sc.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', function () { start = null; update(); });
     update();
   })();
-  // Табы «Белый» и «Зелёный» (2026-11-10): зелёный — Figma 4660:14499, тот же концепт, другие цвета.
+  // Две темы (2026-11-10): зелёная — Figma 4660:14499, тот же концепт, другие цвета. С 2026-11-11 без табов, две ссылки: без хеша белая, #green зелёная.
   // Цвета — переменными на .app, иконки и сторис с зашитыми цветами — из зелёных копий (ic-green/, img/story-green-*).
   (function () {
     var app = document.querySelector('.app');
     function setTheme() {
       var green = location.hash === '#green';
       app.dataset.theme = green ? 'green' : 'white';
+      // полоса с часами и батареей — цвета шапки с адресом: theme-color и фон страницы, по ним браузер её красит
+      var bar = green ? '#f1f3ef' : '#ffffff';
+      document.querySelector('meta[name=theme-color]').content = bar;
+      document.documentElement.style.background = document.body.style.background = bar;
       document.querySelectorAll('.screen img').forEach(function (img) {
         if (!img.dataset.src) img.dataset.src = img.getAttribute('src');
         var src = img.dataset.src;
         img.setAttribute('src', green ? src.replace(/^ic\//, 'ic-green/').replace(/^img\/story-(\d)/, 'img/story-green-$1') : src);
       });
-      document.querySelectorAll('.vtab').forEach(function (t) { t.classList.toggle('on', t.dataset.theme === app.dataset.theme); });
     }
-    document.querySelectorAll('.vtab').forEach(function (t) {
-      t.addEventListener('click', function () { location.hash = t.dataset.theme === 'green' ? 'green' : ''; });
-    });
     window.addEventListener('hashchange', setTheme);
     setTheme();
   })();
