@@ -97,8 +97,8 @@ img { display: block; }
 /* Зелёная тема — Figma 4660:14499 (2026-11-10): тот же концепт, заменены только цвета. Фон #f1f3ef, подложки #e4e7e3,
    текст и иконки #0e3c1a, серый текст #95a399, звёзды #f1b53b (в иконках). Выбранный фильтр — цвета подложки, не белый. */
 .app[data-theme="green"] { --color-bg: #f1f3ef; --color-bg-contrast: #e4e7e3; --color-text-and-icon: #0e3c1a; --color-text-and-icon-mute: #95a399; }
-/* в зелёной обводка остаётся тёмной: --color-border (#e3e6e2) не виден на подложке #e4e7e3 */
-.app[data-theme="green"] .chip.on { border-color: var(--color-text-and-icon); background: var(--color-bg-contrast); }
+/* в зелёной обводка выбранного фильтра #a3b4a7 (Figma 4660:14622, 2026-11-11; в макете без переменной) */
+.app[data-theme="green"] .chip.on { border-color: #a3b4a7; background: var(--color-bg-contrast); }
 
 /* Ряд повара: фото повара и три блюда, все 160×160. Серую плашку с описанием, ценой
    и рейтингом в конце ряда убрали по просьбе пользователя (2026-11-02): всё это уже есть рядом с именем.
