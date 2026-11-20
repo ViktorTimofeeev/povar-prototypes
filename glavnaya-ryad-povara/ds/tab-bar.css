@@ -12,7 +12,7 @@
  *   <nav class="tab-bar" data-active="home" data-cart="4"></nav>
  *   <script src="…/design-system/components/tab-bar.js"></script>
  *
- * data-active: home | catalog | orders | cart | profile
+ * data-active: home | orders | cart | chats | profile
  * data-cart:   число на бейдже корзины; нет атрибута — нет бейджа.
  * Таббар не задаёт себе внешние отступы и положение: прибить его к низу экрана —
  * дело контейнера (например, flex-колонка с прокручиваемым содержимым выше).

@@ -6,16 +6,16 @@
 <!-- полоса с часами и батареей — цвета шапки с адресом (2026-11-11); тема меняет его скриптом -->
 <meta name="theme-color" content="#ffffff">
 <title>Главная: ряд повара</title>
-<!-- Концепт главной: Figma «Главная», кадр 4627:99303 (2026-11-02). Вариант «Плашки под фото» (4632:100122) и переключатель
-     убраны 2026-11-03, они есть в коммите 731d653; прежние варианты — в arhiv/.
-     Верх по кадру 4609:38495 (2026-10-30). Данные поваров — с прода 26.10.26,
-     koncept-ryad-povara/povara.json. Баннер — статичная картинка по кадру 4633:101047 (2026-11-03); до этого было видео v12 из tasks/10-2026-illyustracii-offerov. -->
+<!-- Концепт главной: Figma «Главная», секция 4780:219049 (2026-11-20) — этаж по кадру 4759:200553
+     (второй вариант 4780:204727 снят, есть в коммите cc2fe8f) и закреплённый адрес (4780:219273). Прежняя вёрстка — в коммитах до 2026-11-20, ещё раньше — arhiv/.
+     Данные поваров — с прода 26.10.26, koncept-ryad-povara/povara.json; станции метро — из макетов, не с прода.
+     Баннер — статичная картинка, собрана из слоёв кадра 4759:200554. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
-<link rel="stylesheet" href="ds/tokens.css?v=202610302329">
-<link rel="stylesheet" href="ds/tab-bar.css?v=202610302329">
-<link rel="stylesheet" href="local.css?v=20261111chipg">
+<link rel="stylesheet" href="ds/tokens.css?v=20261120pub">
+<link rel="stylesheet" href="ds/tab-bar.css?v=20261120pub">
+<link rel="stylesheet" href="local.css?v=20261120pub">
 </head>
 <body>
 <div class="app">
@@ -25,9 +25,9 @@
   <div class="head-bar" hidden></div>
   <main class="scroll">
     <!-- Фото баннера стоит на месте, белый лист наезжает на него. Затемнение, текст, кнопка и точки едут с листом.
-         Адрес всегда на экране; серая шапка поднимается из-под листа и становится его фоном (Figma 4636:101626, кадры 1–5). -->
+         Адрес всегда на экране; при закреплении растягивается на всю ширину над белой панелью (Figma 4780:219273). -->
     <div class="banner-photo">
-      <img class="banner-img" src="img/banner-static.jpg" alt="">
+      <img class="banner-img" src="img/banner-v20261120.jpg" alt="">
       <div class="banner-dim"></div>
       <div class="banner-top"></div>
     </div>
@@ -44,63 +44,84 @@
     </section>
 
     <section class="sheet">
-      <div class="stories hs">
-        <a class="story" href="#"><img src="img/story-1.webp?v=20261110" alt="" width="80" height="80">Отбор поваров</a>
-        <a class="story" href="#"><img src="img/story-2.webp" alt="" width="80" height="80">Плюсы сервиса</a>
-        <a class="story" href="#"><img src="img/story-3.webp" alt="" width="80" height="80">Наши ценности</a>
-        <a class="story" href="#"><img src="img/story-4.webp" alt="" width="80" height="80">Нужна помощь?</a>
-        <a class="story" href="#"><img src="img/story-5.svg" alt="" width="80" height="80">Стать поваром</a>
+      <div class="search-row">
+        <div class="search"><img src="ic/search.svg" alt="" width="24" height="24"><span>Повар или блюдо</span></div>
+        <button class="filter-btn" type="button" aria-label="Фильтры, выбрано 2"><img src="ic/list-filter.svg" alt="" width="24" height="24"><span class="badge">2</span></button>
       </div>
-      <div class="search"><img src="ic/search.svg" alt="" width="24" height="24">Повар или блюдо</div>
+      <div class="tiles hs">
+        <a class="tile" href="#" style="width:96px"><img src="img/v2/tile-mandarin.png" alt="" style="--r:-34px;--b:-9px"><span>Новый<br>год</span></a>
+        <a class="tile" href="#" style="width:105px"><img src="img/v2/tile-klosh.png" alt="" style="--r:-31px;--b:-9px"><span>Private<br>chef</span></a>
+        <a class="tile" href="#" style="width:117px"><img src="img/v2/tile-pirozhok.png" alt="" style="--r:-34px;--b:-9px"><span>Домашние<br>повара</span></a>
+        <a class="tile" href="#" style="width:120px"><img src="img/v2/tile-kolpak.png" alt="" style="--r:-28px;--b:-9px"><span>Проф.<br>повара</span></a>
+        <a class="tile" href="#" style="width:88px"><img src="img/v2/tile-tort.png" alt="" style="--r:-26.86px;--b:-2.61px;--w:82px;--h:44.727px"><span>Конди-<br>теры</span></a>
+      </div>
       <div class="filters hs">
         <button class="chip icon" type="button" aria-label="Сортировка"><img src="ic/sort.svg" alt="" width="24" height="24"></button>
-        <button class="chip" type="button"><img src="ic/ruble.svg" alt="" width="24" height="24">Цена</button>
-        <button class="chip on" type="button"><img src="ic/time-24.svg" alt="" width="24" height="24">Время<img class="x" src="ic/close-small.svg" alt="" width="24" height="24"></button>
-        <button class="chip" type="button"><img src="ic/chef-hat.svg" alt="" width="24" height="24">Тип повара</button>
+        <button class="chip" type="button">Время</button>
+        <button class="chip on" type="button">Вид повара<img src="ic/close-small.svg" alt="" width="24" height="24"></button>
+        <button class="chip" type="button">Категории</button>
+        <button class="chip" type="button">Цена</button>
       </div>
 
-      <!-- Повара, вариант «Одна карусель»: Figma 4627:99303 — сверху имя, рейтинг и сроки, ниже ряд: фото повара и три блюда (серая плашка в конце ряда убрана 2026-11-02); под рядом описание серым -->
+      <!-- Этажи поваров — Figma 4759:200553 -->
       <div class="cooks">
         <article class="cook">
-          <a class="cook-info" href="#">
-            <span class="cook-row"><span class="cook-name"><b>Александр Козлов</b><img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></span><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(240)</span></span></span>
-            <span class="cook-row mute"><span class="when">Завтра с 11:00 ·<img src="ic/delivery-24-mute.svg" alt="" width="24" height="24">От 540 ₽</span><span><span class="ink">₽₽</span>₽</span></span>
+          <a class="cook-head" href="#">
+            <b class="cook-name">Александр Козлов</b><span class="cook-bio">Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</span>
           </a>
           <div class="dishes hs">
-            <a class="cook-photo" href="#"><img src="img/av-kozlov.webp" alt="Александр Козлов"></a>
+            <a class="cook-photo" href="#"><img src="img/av-kozlov.webp" alt="Александр Козлов"><span class="photo-rate"><img src="ic/star-fill-16.svg" alt="" width="16" height="16"><span>5.0 <span class="mute">(240) · </span>₽₽<span class="mute">₽</span></span></span></a>
             <img src="img/emelyanova-1.webp" alt="">
             <img src="img/emelyanova-2.webp" alt="">
             <img src="img/emelyanova-3.webp" alt="">
           </div>
-          <p class="cook-bio">Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</p>
+          <div class="facts hs">
+            <span class="fact"><img src="ic/clock.svg" alt="" width="24" height="24"><span>Завтра с 11:00</span></span>
+            <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
+            <span class="fact"><span class="pin" style="--line:#fc5454"><img src="ic/map-pin.svg" alt="" width="24" height="24"><i></i></span><span>Университет Дружбы Народов</span></span>
+          </div>
         </article>
 
         <article class="cook">
-          <a class="cook-info" href="#">
-            <span class="cook-row"><span class="cook-name"><b>Денис Сыс</b><img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></span><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">4.9<span class="mute">&nbsp;(274)</span></span></span>
-            <span class="cook-row mute"><span class="when">Сегодня с 21:00 ·<img src="ic/delivery-24-mute.svg" alt="" width="24" height="24">От 540 ₽</span><span><span class="ink">₽₽</span>₽</span></span>
+          <a class="cook-head" href="#">
+            <b class="cook-name">Денис Сыс</b><span class="cook-bio">Шеф-повар с 10-летним стажем и международным опытом</span>
           </a>
           <div class="dishes hs">
-            <a class="cook-photo" href="#"><img src="img/av-sys.webp" alt="Денис Сыс"></a>
+            <a class="cook-photo" href="#"><img src="img/av-sys.webp" alt="Денис Сыс"><span class="photo-rate"><img src="ic/star-fill-16.svg" alt="" width="16" height="16"><span>4.9 <span class="mute">(274) · </span>₽₽<span class="mute">₽</span></span></span></a>
             <img src="img/sys-1.webp" alt="">
             <img src="img/sys-2.webp" alt="">
             <img src="img/sys-3.webp" alt="">
           </div>
-          <p class="cook-bio">Шеф-повар с 10-летним стажем и международным опытом</p>
+          <div class="facts hs">
+            <span class="fact"><img src="ic/clock-green.svg" alt="" width="24" height="24"><span>Сегодня с 21:00</span></span>
+            <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
+            <span class="fact"><span class="pin" style="--line:#3c8fdc"><img src="ic/map-pin.svg" alt="" width="24" height="24"><i></i></span><span>Бибирево</span></span>
+          </div>
         </article>
 
+        <a class="interlude" href="#">
+          <img src="img/v2/otbor.png" alt="" width="80" height="80">
+          <span class="interlude-t">
+            <b><span>Как мы отбираем поваров</span><img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></b>
+            <p>Кого пускаем готовить и что проверяем перед первым заказом</p>
+          </span>
+        </a>
+
         <article class="cook">
-          <a class="cook-info" href="#">
-            <span class="cook-row"><span class="cook-name"><b>Елена Емельянова</b><img src="ic/chevron-right-bold.svg" alt="" width="24" height="24"></span><span class="rate"><img src="ic/star-fill-24.svg" alt="" width="24" height="24">5.0<span class="mute">&nbsp;(384)</span></span></span>
-            <span class="cook-row mute"><span class="when">Завтра с 11:00 ·<img src="ic/delivery-24-mute.svg" alt="" width="24" height="24">От 540 ₽</span><span><span class="ink">₽</span>₽₽</span></span>
+          <a class="cook-head" href="#">
+            <b class="cook-name">Елена Емельянова</b><span class="cook-bio">Профессиональный повар, стаж более 20 лет</span>
           </a>
           <div class="dishes hs">
-            <a class="cook-photo" href="#"><img src="img/av-emelyanova.webp" alt="Елена Емельянова"></a>
+            <a class="cook-photo" href="#"><img src="img/av-emelyanova.webp" alt="Елена Емельянова"><span class="photo-rate"><img src="ic/star-fill-16.svg" alt="" width="16" height="16"><span>5.0 <span class="mute">(384) · </span>₽<span class="mute">₽₽</span></span></span></a>
             <img src="img/kozlov-1.webp" alt="">
             <img src="img/kozlov-2.webp" alt="">
             <img src="img/kozlov-3.webp" alt="">
           </div>
-          <p class="cook-bio">Профессиональный повар, стаж более 20 лет</p>
+          <div class="facts hs">
+            <span class="fact"><img src="ic/clock.svg" alt="" width="24" height="24"><span>Завтра с 11:00</span></span>
+            <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
+            <span class="fact"><span class="pin" style="--line:#2ba84a"><img src="ic/map-pin.svg" alt="" width="24" height="24"><i></i></span><span>Сокольники</span></span>
+          </div>
         </article>
       </div>
     </section>
@@ -108,21 +129,22 @@
   </div>
   <nav class="tab-bar" data-active="home" data-cart="4"></nav>
 </div>
-<script src="ds/tab-bar.js?v=20261111chats"></script>
+<script src="ds/tab-bar.js?v=20261120pub"></script>
 <script>
-  // Шапка с адресом (2026-11-11, Figma 4662:14940 и 4662:15257). Пока лист далеко, фото темнеет: чем ближе лист
-  // к адресу, тем темнее, до 50 %. Когда до верха листа остаётся 112 px, белая шапка поднимается из-под листа быстрее
-  // него — край листа будто ускоряется и закрывает фото — и доходит до верха, когда лист встаёт в 4 px под адресом
-  // (60 px). Дальше шапка закреплена: белая панель высотой 60 px над контентом, контент уходит под неё. За следующие
-  // 24 px прокрутки её нижние углы скругляются до 24 и проявляется обводка (Figma 4662:16560); скругление верха листа под ней уходит в ноль.
+  // Шапка с адресом. Пока лист далеко, фото темнеет: чем ближе лист к адресу, тем темнее, до 50 %. Когда до верха
+  // листа остаётся 124 px, белый фон поднимается из-под листа быстрее него и доходит до верха, когда лист встаёт
+  // под панель (72 px = 16 + плашка 40 + 16). Дальше адрес закреплён (Figma 4780:219273, 2026-11-20): белая панель
+  // над контентом, за следующие 24 px прокрутки её нижние углы скругляются до 24, проявляется тень, а плашка адреса
+  // растягивается от ширины текста до всей ширины минус 16 по краям — текст по центру, иконки уходят к краям.
   (function () {
-    var sc = document.querySelector('.scroll'), sheet = document.querySelector('.sheet');
+    var sc = document.querySelector('.scroll'), sheet = document.querySelector('.sheet'), addr = document.querySelector('.addr');
     var bg = document.querySelector('.head-bg'), bar = document.querySelector('.head-bar'), dim = document.querySelector('.banner-dim');
-    var FROM = 112, TO = 60, R = 24, DIM = .5, start = null, queued = false;
+    var FROM = 124, TO = 72, R = 24, DIM = .5, start = null, hug = null, queued = false;
     function update() {
       queued = false;
       var t = sheet.getBoundingClientRect().top - sc.getBoundingClientRect().top;
       if (start === null || sc.scrollTop === 0) start = t + sc.scrollTop;
+      if (hug === null) { addr.style.width = ''; hug = addr.offsetWidth; }
       dim.style.opacity = DIM * Math.min(1, Math.max(0, (start - t) / (start - FROM)));
       var p = Math.min(1, Math.max(0, (FROM - t) / (FROM - TO)));
       var q = Math.min(1, Math.max(0, (TO - t) / R));
@@ -131,11 +153,14 @@
       bg.style.borderRadius = (R * (1 - p)) + 'px ' + (R * (1 - p)) + 'px 0 0';
       bar.hidden = t > TO;
       bar.style.borderRadius = '0 0 ' + (R * q) + 'px ' + (R * q) + 'px';
-      bar.style.setProperty('--q', (q * 100).toFixed(1) + '%');
+      bar.style.setProperty('--q', q.toFixed(3));
+      var full = sc.clientWidth - 32;
+      addr.style.width = q > 0 ? (hug + (full - hug) * q) + 'px' : '';
       sheet.style.borderRadius = (R * (1 - q)) + 'px ' + (R * (1 - q)) + 'px 0 0';
     }
     sc.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
-    window.addEventListener('resize', function () { start = null; update(); });
+    window.addEventListener('resize', function () { start = null; hug = null; update(); });
+    document.fonts && document.fonts.ready.then(function () { hug = null; update(); });
     update();
   })();
   // Две темы (2026-11-10): зелёная — Figma 4660:14499, тот же концепт, другие цвета. С 2026-11-11 без табов, две ссылки: без хеша белая, #green зелёная.
@@ -160,6 +185,14 @@
   })();
   // Старые ссылки на #v1 и #v2 ведут в архив
   if (location.hash === '#v1' || location.hash === '#v2') location.replace('arhiv/index.html' + location.hash);
+  // Строка «время · доставка · метро» едет вместе с рядом фото (2026-11-20): сдвигается на столько же, пока не дойдёт
+  // до своего конца — тогда встаёт у правого края, а фото листаются дальше. Обратно так же.
+  document.querySelectorAll('.cook').forEach(function (cook) {
+    var dishes = cook.querySelector('.dishes'), facts = cook.querySelector('.facts');
+    function sync() { facts.scrollLeft = Math.min(dishes.scrollLeft, facts.scrollWidth - facts.clientWidth); }
+    dishes.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+  });
   // Пока ссылок на экраны повара нет
   document.querySelectorAll('a[href="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); });
