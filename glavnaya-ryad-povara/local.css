@@ -58,12 +58,15 @@ img { display: block; }
    Закреплённый (Figma 4780:219273, 2026-11-20): плашка растягивается на всю ширину минус 16 по краям,
    текст по центру, иконки по краям; под ней белая панель со скруглённым низом 24 и тенью.
    Ширину по мере прокрутки задаёт скрипт. */
-.addr { position: absolute; top: 16px; left: 50%; z-index: 5; transform: translateX(-50%); display: flex; align-items: center; justify-content: space-between; gap: 8px; max-width: calc(100% - 32px); height: 40px; padding: 8px 12px; border-radius: var(--radius-default); background: var(--color-bg-contrast); font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; }
+.addr { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); left: 50%; z-index: 5; transform: translateX(-50%); display: flex; align-items: center; justify-content: space-between; gap: 8px; max-width: calc(100% - 32px); height: 40px; padding: 8px 12px; border-radius: var(--radius-default); background: var(--color-bg-contrast); font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; }
 .addr span { overflow: hidden; text-overflow: ellipsis; padding: 1px 0 2px; }
 /* белый фон, который поднимается из-под листа перед закреплением (2026-11-11) */
 .head-bg { position: absolute; top: 0; left: 0; right: 0; z-index: 2; height: 240px; border-radius: 24px 24px 0 0; background: var(--color-bg); visibility: hidden; pointer-events: none; }
-/* закреплённая панель: 16 + плашка 40 + 16. Тень 0 2 32 −5 rgba(13,18,28,.16), её плотность — --q от скрипта */
-.head-bar { --q: 0; position: absolute; top: 0; left: 0; right: 0; z-index: 4; height: 72px; background: var(--color-bg); box-shadow: 0 2px 32px -5px rgba(13, 18, 28, calc(.16 * var(--q))); pointer-events: none; }
+/* закреплённая панель: 16 + плашка 40 + 16. С 2026-11-20 position: fixed у верхнего края — по ней Safari на iOS 26
+   красит полосу с часами; адрес тоже fixed. Если страница лежит под полосой, обе сдвигаются на её высоту (safe-area). */
+/* Тень 0 2 32 −5 rgba(13,18,28,.16), её плотность — --q от скрипта */
+.head-bar { --q: 0; position: fixed; top: 0; left: 0; right: 0; z-index: 4; max-width: 500px; margin: 0 auto; height: calc(72px + env(safe-area-inset-top, 0px)); background: var(--color-bg); box-shadow: 0 2px 32px -5px rgba(13, 18, 28, calc(.16 * var(--q))); pointer-events: none; }
+@media (hover: hover) and (pointer: fine) { .head-bar { max-width: 440px; } }
 
 /* белый лист — Figma 4759:200553: от верха листа 16, поиск, 16, карточки подборок, 16, фильтры, 32, повара */
 .sheet { position: relative; z-index: 3; margin-top: -24px; padding: 16px 0 110px; border-radius: 24px 24px 0 0; background: var(--color-bg); }
