@@ -81,7 +81,7 @@ img { display: block; }
 .tiles { gap: 6px; margin-top: 16px; padding: 0 16px; }
 .tile { position: relative; flex: none; height: 72px; border-radius: var(--radius-default); background: var(--color-bg-contrast); overflow: hidden; color: var(--color-text-and-icon); text-decoration: none; }
 .tile span { position: absolute; left: 10px; top: 7px; font: var(--font-caption); white-space: nowrap; }
-.tile img { position: absolute; right: var(--r); bottom: var(--b); width: var(--w, 108px); height: var(--h, 59px); max-width: none; object-fit: contain; }
+.tile img { position: absolute; right: var(--r); bottom: var(--b); width: var(--w, 132px); height: var(--h, 72px); max-width: none; object-fit: contain; }
 
 /* Фильтры — 4759:200633: без иконок, кроме сортировки; выбранный белый с обводкой 1 px и крестиком.
    Ряд листается вбок; запас 2 px сверху и снизу, чтобы не срезалась обводка выбранного */
@@ -120,10 +120,10 @@ img { display: block; }
    сегмент — плашкой на фото. Линия 1 px (обводка верха шапки, до имени 10 — в макете 8, пользователь попросил 10 2026-11-20) только между двумя поварами подряд:
    после перебивки или баннера её нет (2026-11-20). Второй вариант этажа (4780:204727) снят 2026-11-20, есть в коммите cc2fe8f;
    вариант со скруглениями 0 и 4 px — в коммите 3090d8a. */
-.cook-head { padding-top: 10px; }
-.cook + .cook .cook-head { border-top: 1px solid var(--color-border); }
+/* 2026-11-21: отступ над именем только у этажа с разделителем; описание на 3 px ниже — верх строчных на одной линии с именем (Figma 4759:200732) */
+.cook + .cook .cook-head { padding-top: 10px; border-top: 1px solid var(--color-border); }
 .cook-name { flex: none; width: 144px; }
-.cook-bio { flex: 1; min-width: 0; -webkit-line-clamp: 3; }
+.cook-bio { flex: 1; min-width: 0; padding-top: 3px; -webkit-line-clamp: 3; }
 .photo-rate { position: absolute; left: 0; bottom: 0; display: flex; align-items: flex-start; gap: 4px; padding: 6px 8px; border-radius: 0 8px 0 0; background: rgba(0, 0, 0, .24); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: var(--font-caption); color: #fff; white-space: nowrap; }
 .photo-rate span { padding-bottom: 1px; }
 .photo-rate .mute { color: #a1a6a1; }
