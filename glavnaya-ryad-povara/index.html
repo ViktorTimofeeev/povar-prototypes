@@ -8,15 +8,16 @@
 <!-- Сравнение для команды (2026-11-23): вкладки «Новый концепт» и «Нынешняя главная».
      Концепт — koncept.html, нынешняя — снимок прода nyneshnyaya/index.html.
      Обе страницы живут в своих фреймах: стили прода не задевают концепт, у каждой своя прокрутка,
-     переключение мгновенное и прокрутка не сбрасывается. -->
+     переключение мгновенное и прокрутка не сбрасывается.
+     Вкладки не закреплены (2026-11-23): стоят только вверху и уезжают вместе с прокруткой открытой страницы. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&display=swap">
-<link rel="stylesheet" href="ds/tokens.css?v=20261123pub8">
+<link rel="stylesheet" href="ds/tokens.css?v=20261123pub9">
 <style>
   html, body { margin: 0; height: 100%; }
   body { background: #e5e5ea; font: var(--font-body); color: var(--color-text-and-icon); }
-  .cmp { display: flex; flex-direction: column; width: 100%; max-width: 500px; height: 100vh; height: 100dvh; margin: 0 auto; background: #fff; }
+  .cmp { display: flex; flex-direction: column; width: 100%; max-width: 500px; height: 100vh; height: 100dvh; margin: 0 auto; overflow: hidden; background: #fff; }
   .cmp-tabs { flex: none; display: flex; gap: 2px; margin: 8px 16px; padding: 2px; border-radius: 10px; background: var(--color-bg-contrast); }
   .cmp-tabs button { flex: 1 1 0; min-width: 0; padding: 6px 8px 7px; border: 0; border-radius: 8px; background: none; font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; cursor: pointer; }
   .cmp-tabs button[aria-selected="true"] { background: #fff; color: var(--color-text-and-icon); font-weight: 600; box-shadow: 0 1px 4px rgba(13, 18, 28, .12); }
@@ -46,7 +47,35 @@
         b.setAttribute('aria-selected', on);
         document.getElementById(b.dataset.view).setAttribute('aria-hidden', !on);
       });
+      active = btn.dataset.view;
+      fold();
     });
+  });
+  // Вкладки не закреплены: пока открытая страница прокручена меньше их высоты, они уезжают вверх на столько же,
+  // дальше спрятаны совсем. Прокрутка у каждой страницы своя — внутри фрейма; у концепта она в .scroll.
+  var tabs = document.querySelector('.cmp-tabs'), active = 'koncept';
+  function scroller(id) {
+    try {
+      var d = document.getElementById(id).contentDocument;
+      return id === 'koncept' ? d.querySelector('.scroll') : d.scrollingElement;
+    } catch (e) { return null; }
+  }
+  // Сдвиг пишем прямо в обработчике прокрутки: она и так приходит раз в кадр, а requestAnimationFrame
+  // в родительском окне отстаёт от прокрутки внутри фрейма.
+  function fold() {
+    var sc = scroller(active), top = sc ? sc.scrollTop : 0, h = tabs.offsetHeight + 16;
+    tabs.style.marginTop = (8 - Math.min(Math.max(top, 0), h)) + 'px';
+  }
+  ['koncept', 'nyneshnyaya'].forEach(function (id) {
+    var frame = document.getElementById(id);
+    function hook() {
+      var sc = scroller(id);
+      if (!sc) return;
+      (id === 'koncept' ? sc : frame.contentWindow).addEventListener('scroll', fold, { passive: true });
+      fold();
+    }
+    frame.addEventListener('load', hook);
+    if (frame.contentDocument && frame.contentDocument.readyState === 'complete') hook();
   });
 </script>
 </body>
