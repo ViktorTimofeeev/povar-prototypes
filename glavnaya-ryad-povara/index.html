@@ -6,24 +6,23 @@
 <meta name="theme-color" content="#ffffff">
 <title>Главная: новый концепт и нынешняя</title>
 <!-- Сравнение для команды (2026-11-23): вкладки «Новый концепт» и «Нынешняя главная».
-     Концепт — koncept.html (#green — зелёная тема, как раньше), нынешняя — снимок прода nyneshnyaya/index.html.
+     Концепт — koncept.html, нынешняя — снимок прода nyneshnyaya/index.html.
      Обе страницы живут в своих фреймах: стили прода не задевают концепт, у каждой своя прокрутка,
      переключение мгновенное и прокрутка не сбрасывается. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&display=swap">
-<link rel="stylesheet" href="ds/tokens.css?v=20261123pub7">
+<link rel="stylesheet" href="ds/tokens.css?v=20261123pub8">
 <style>
   html, body { margin: 0; height: 100%; }
   body { background: #e5e5ea; font: var(--font-body); color: var(--color-text-and-icon); }
-  .cmp { display: flex; flex-direction: column; width: 100%; max-width: 500px; height: 100vh; height: 100dvh; margin: 0 auto; background: var(--cmp-bg, #fff); }
+  .cmp { display: flex; flex-direction: column; width: 100%; max-width: 500px; height: 100vh; height: 100dvh; margin: 0 auto; background: #fff; }
   .cmp-tabs { flex: none; display: flex; gap: 2px; margin: 8px 16px; padding: 2px; border-radius: 10px; background: var(--color-bg-contrast); }
   .cmp-tabs button { flex: 1 1 0; min-width: 0; padding: 6px 8px 7px; border: 0; border-radius: 8px; background: none; font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; cursor: pointer; }
-  .cmp-tabs button[aria-selected="true"] { background: var(--cmp-bg, #fff); color: var(--color-text-and-icon); font-weight: 600; box-shadow: 0 1px 4px rgba(13, 18, 28, .12); }
+  .cmp-tabs button[aria-selected="true"] { background: #fff; color: var(--color-text-and-icon); font-weight: 600; box-shadow: 0 1px 4px rgba(13, 18, 28, .12); }
   .cmp-view { position: relative; flex: 1; min-height: 0; }
   .cmp-view iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
   .cmp-view iframe[aria-hidden="true"] { visibility: hidden; }
-  body[data-theme="green"] { --cmp-bg: #f1f3ef; --color-bg-contrast: #e4e7e3; }
 </style>
 </head>
 <body>
@@ -33,24 +32,13 @@
     <button type="button" role="tab" data-view="nyneshnyaya" aria-selected="false">Нынешняя главная</button>
   </div>
   <div class="cmp-view">
-    <iframe id="koncept" title="Новый концепт" aria-hidden="false"></iframe>
+    <iframe id="koncept" title="Новый концепт" src="koncept.html" aria-hidden="false"></iframe>
     <iframe id="nyneshnyaya" title="Нынешняя главная" src="nyneshnyaya/index.html" aria-hidden="true"></iframe>
   </div>
 </div>
 <script>
   // Старые ссылки на #v1 и #v2 ведут в архив
   if (location.hash === '#v1' || location.hash === '#v2') location.replace('arhiv/index.html' + location.hash);
-  // #green — зелёная тема концепта: передаём во фрейм, полосу браузера и вкладки красим в её фон
-  var koncept = document.getElementById('koncept');
-  function theme() {
-    var green = location.hash === '#green';
-    document.body.dataset.theme = green ? 'green' : 'white';
-    document.querySelector('meta[name=theme-color]').content = green ? '#f1f3ef' : '#ffffff';
-    var src = 'koncept.html' + (green ? '#green' : '');
-    if (koncept.getAttribute('src') !== src) koncept.setAttribute('src', src);
-  }
-  window.addEventListener('hashchange', theme);
-  theme();
   document.querySelectorAll('.cmp-tabs button').forEach(function (btn) {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.cmp-tabs button').forEach(function (b) {

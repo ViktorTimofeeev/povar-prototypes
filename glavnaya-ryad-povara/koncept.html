@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- полоса с часами и батареей — цвета шапки с адресом (2026-11-11); тема меняет его скриптом -->
+<!-- полоса с часами и батареей — цвета шапки с адресом (2026-11-11) -->
 <meta name="theme-color" content="#ffffff">
 <title>Главная: новый концепт</title>
 <!-- Концепт главной: Figma «Главная», секция 4780:219049 (2026-11-20) — этаж по кадру 4759:200553
@@ -13,9 +13,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
-<link rel="stylesheet" href="ds/tokens.css?v=20261123pub7">
-<link rel="stylesheet" href="ds/tab-bar.css?v=20261123pub7">
-<link rel="stylesheet" href="local.css?v=20261123pub7">
+<link rel="stylesheet" href="ds/tokens.css?v=20261123pub8">
+<link rel="stylesheet" href="ds/tab-bar.css?v=20261123pub8">
+<link rel="stylesheet" href="local.css?v=20261123pub8">
 </head>
 <body>
 <div class="app">
@@ -78,7 +78,7 @@
           </div>
           <div class="facts hs">
             <span class="fact"><img src="ic/clock.svg" alt="" width="24" height="24"><span>Завтра с 11:00</span></span>
-            <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
+            <span class="fact"><img src="ic/car-front.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
             <span class="fact"><img src="ic/map-pin.svg" alt="" width="24" height="24"><span>Университет Дружбы Народов</span></span>
           </div>
         </article>
@@ -96,7 +96,7 @@
           </div>
           <div class="facts hs">
             <span class="fact"><img src="ic/clock-green.svg" alt="" width="24" height="24"><span>Сегодня с 21:00</span></span>
-            <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
+            <span class="fact"><img src="ic/car-front.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
             <span class="fact"><img src="ic/map-pin.svg" alt="" width="24" height="24"><span>Бибирево</span></span>
           </div>
         </article>
@@ -122,7 +122,7 @@
           </div>
           <div class="facts hs">
             <span class="fact"><img src="ic/clock.svg" alt="" width="24" height="24"><span>Завтра с 11:00</span></span>
-            <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
+            <span class="fact"><img src="ic/car-front.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
             <span class="fact"><img src="ic/map-pin.svg" alt="" width="24" height="24"><span>Сокольники</span></span>
           </div>
         </article>
@@ -132,7 +132,7 @@
   </div>
   <nav class="tab-bar" data-active="home" data-cart="4"></nav>
 </div>
-<script src="ds/tab-bar.js?v=20261123pub7"></script>
+<script src="ds/tab-bar.js?v=20261123pub8"></script>
 <script>
   // Шапка с адресом. Пока лист далеко, фото темнеет: чем ближе лист к адресу, тем темнее, до 50 %. Когда до верха
   // листа остаётся 124 px, белый фон поднимается из-под листа быстрее него и доходит до верха, когда лист встаёт
@@ -144,7 +144,7 @@
     var bg = document.querySelector('.head-bg'), bar = document.querySelector('.head-bar'), dim = document.querySelector('.banner-dim');
     var FROM = 124, TO = 72, R = 24, DIM = .5, start = null, hug = null, queued = false;
     // Полоса с часами и батареей в мобильном Safari (2026-11-20): после закрепления адреса — белая, символы тёмные.
-    // iOS 15–18 красят её по theme-color и фону страницы (белые, задаёт скрипт темы), iOS 26 — по элементу
+    // iOS 15–18 красят её по theme-color и фону страницы (белые: meta и фон body), iOS 26 — по элементу
     // position: fixed у верхнего края: это закреплённая панель. Если Safari кладёт страницу под полосу
     // (viewport-fit=cover), адрес и панель сдвигаются на её высоту — sat берём из вычисленного top плашки адреса.
     var sat = 0;
@@ -172,26 +172,6 @@
     window.addEventListener('resize', function () { start = null; hug = null; update(); });
     document.fonts && document.fonts.ready.then(function () { hug = null; update(); });
     update();
-  })();
-  // Две темы (2026-11-10): зелёная — Figma 4660:14499, тот же концепт, другие цвета. С 2026-11-11 без табов, две ссылки: без хеша белая, #green зелёная.
-  // Цвета — переменными на .app, иконки и сторис с зашитыми цветами — из зелёных копий (ic-green/, img/story-green-*).
-  (function () {
-    var app = document.querySelector('.app');
-    function setTheme() {
-      var green = location.hash === '#green';
-      app.dataset.theme = green ? 'green' : 'white';
-      // полоса с часами и батареей — цвета шапки с адресом: theme-color и фон страницы, по ним браузер её красит
-      var bar = green ? '#f1f3ef' : '#ffffff';
-      document.querySelector('meta[name=theme-color]').content = bar;
-      document.documentElement.style.background = document.body.style.background = bar;
-      document.querySelectorAll('.screen img').forEach(function (img) {
-        if (!img.dataset.src) img.dataset.src = img.getAttribute('src');
-        var src = img.dataset.src;
-        img.setAttribute('src', green ? src.replace(/^ic\//, 'ic-green/').replace(/^img\/story-(\d)/, 'img/story-green-$1') : src);
-      });
-    }
-    window.addEventListener('hashchange', setTheme);
-    setTheme();
   })();
   // Старые ссылки на #v1 и #v2 ведут в архив
   if (location.hash === '#v1' || location.hash === '#v2') location.replace('arhiv/index.html' + location.hash);

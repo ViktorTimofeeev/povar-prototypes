@@ -3,7 +3,7 @@
    Прежняя вёрстка (сторис-кружки, фильтры с иконками, этаж «имя и рейтинг сверху») — в коммите до 2026-11-20. */
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
-body { background: #e5e5ea; font: var(--font-body); color: var(--color-text-and-icon); }
+body { background: var(--color-bg); font: var(--font-body); color: var(--color-text-and-icon); }
 /* На телефоне фон страницы — цвета шапки (его ставит скрипт, по нему браузер красит полосу с часами).
    Ширина (2026-11-20): на телефоне до 500 px — на случай широкого телефона у согласующего, на десктопе
    (мышь) 440 px. Шире прототипа — по бокам серый. */
@@ -140,7 +140,3 @@ img { display: block; }
 .interlude-t b { display: flex; align-items: center; gap: 2px; font: var(--font-h4); }
 .interlude-t b span { padding: 1px 0 2px; }
 .interlude-t p { font: var(--font-caption); }
-
-/* Зелёная тема — Figma 4660:14499 (2026-11-10): тот же концепт, другие цвета. Фон #f1f3ef, подложки #e4e7e3,
-   текст и иконки #0e3c1a, серый текст #95a399. Выбранный фильтр — цвета подложки, обводка #a3b4a7. */
-.app[data-theme="green"] { --color-bg: #f1f3ef; --color-bg-contrast: #e4e7e3; --color-text-and-icon: #0e3c1a; --color-text-and-icon-mute: #95a399; }
