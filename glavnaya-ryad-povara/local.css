@@ -90,7 +90,8 @@ img { display: block; }
 .filters { gap: 8px; margin: 14px 0 -2px; padding: 2px 16px; }
 .chip { flex: none; display: flex; align-items: center; gap: 4px; padding: 4px 12px; border: 0; border-radius: var(--radius-small); background: var(--color-bg-contrast); font: var(--font-body); color: var(--color-text-and-icon); white-space: nowrap; cursor: pointer; }
 .chip.icon { padding: 4px 8px; }
-.chip.on { padding: 3px 7px 3px 11px; border: 1px solid var(--color-border); background: var(--color-bg); }
+/* выбранный фильтр — тёмный с белым текстом (Figma 4759:200636, 2026-11-23) */
+.chip.on { padding: 4px 8px 4px 12px; background: var(--color-text-and-icon); color: var(--color-text-and-icon-on-dark, #fff); }
 
 /* повара: от фильтров 32, между этажами 32 */
 .cooks { display: flex; flex-direction: column; gap: 32px; padding-top: 32px; }
@@ -113,8 +114,7 @@ img { display: block; }
 .fact span { padding: 1px 0 2px; }
 /* строка не листается сама: её сдвигает скрипт вслед за рядом фото, пока не дойдёт до конца (2026-11-20) */
 .facts { overflow-x: hidden; }
-/* Точка ветки метро на иконке — 6×6, обводка 1 px снаружи цвета фона (в макете #fc5454 с белой обводкой OUTSIDE 1).
-   Цвет задаётся у каждого повара через --line; пока условные, разные (2026-11-20). */
+/* Где: map-pin и то, что указал повар, — станция метро или район (2026-11-23, Figma 4846:225129) */
 
 /* Этаж — Figma 4759:200731: имя в две строки на 144, справа регалии серым до трёх строк; рейтинг и ценовой
    сегмент — плашкой на фото. Линия 1 px (обводка верха шапки, до имени 10 — в макете 8, пользователь попросил 10 2026-11-20) только между двумя поварами подряд:
@@ -130,9 +130,6 @@ img { display: block; }
 /* 2026-11-23: лейбл «Private chef» на фото повара — исключительный сервис (Figma 4828:222384) */
 .photo-tag { position: absolute; left: 0; top: 0; display: flex; align-items: flex-start; gap: 4px; padding: 6px 8px; border-radius: 0 0 8px 0; background: rgba(0, 0, 0, .24); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: var(--font-caption); color: #fff; white-space: nowrap; }
 .photo-tag span { padding-bottom: 1px; }
-/* 2026-11-23: метро — логотип метро города и кружок ветки с номером (Figma 4828:222367); без метро — обычный map-pin */
-.line { flex: none; display: flex; align-items: center; width: 18px; height: 24px; overflow: hidden; font-style: normal; }
-.line b { min-width: 16px; padding: 0 4px 1px; border-radius: 16px; background: var(--line); font: var(--font-caption); color: #fff; text-align: center; }
 
 
 /* Перебивка между этажами — 4759:200797: серая карточка, картинка 80 (колпак с лупой на белом пятне), заголовок
@@ -147,4 +144,3 @@ img { display: block; }
 /* Зелёная тема — Figma 4660:14499 (2026-11-10): тот же концепт, другие цвета. Фон #f1f3ef, подложки #e4e7e3,
    текст и иконки #0e3c1a, серый текст #95a399. Выбранный фильтр — цвета подложки, обводка #a3b4a7. */
 .app[data-theme="green"] { --color-bg: #f1f3ef; --color-bg-contrast: #e4e7e3; --color-text-and-icon: #0e3c1a; --color-text-and-icon-mute: #95a399; }
-.app[data-theme="green"] .chip.on { border-color: #a3b4a7; background: var(--color-bg-contrast); }

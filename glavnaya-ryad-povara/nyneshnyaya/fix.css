@@ -1,0 +1,12 @@
+/* Карусели на проде — веб-компонент swiper-container: его внутренняя разметка и стили живут в shadow DOM и в снимок
+   не попали. Здесь — то же поведение обычной прокруткой: сториз листаются свободно, баннеры — с примагничиванием. */
+swiper-container { display: flex; padding: 10px 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+swiper-container::-webkit-scrollbar { display: none; }
+swiper-container[free-mode="false"] { scroll-snap-type: x mandatory; }
+swiper-container[free-mode="false"] swiper-slide { scroll-snap-align: start; }
+swiper-slide { flex: none; }
+/* стрелки карусели — только для мыши на десктопе */
+.slider__button-prev, .slider__button-next { display: none !important; }
+/* без скриптов прода блоки встают на 10 px ниже — подогнано по живой странице: сториз с 62, баннеры с 174, поиск с 340 */
+.shorts { margin-top: -10px !important; margin-bottom: 0 !important; }
+.mobile-info-banner { margin-bottom: 10px !important; }
