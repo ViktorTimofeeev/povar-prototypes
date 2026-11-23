@@ -13,9 +13,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Yanone+Kaffeesatz:wght@600&display=swap">
-<link rel="stylesheet" href="ds/tokens.css?v=20261121pub5">
-<link rel="stylesheet" href="ds/tab-bar.css?v=20261121pub5">
-<link rel="stylesheet" href="local.css?v=20261121a">
+<link rel="stylesheet" href="ds/tokens.css?v=20261123pub6">
+<link rel="stylesheet" href="ds/tab-bar.css?v=20261123pub6">
+<link rel="stylesheet" href="local.css?v=20261123a">
 </head>
 <body>
 <div class="app">
@@ -49,11 +49,11 @@
         <button class="filter-btn" type="button" aria-label="Фильтры, выбрано 2"><img src="ic/list-filter.svg" alt="" width="24" height="24"><span class="badge">2</span></button>
       </div>
       <div class="tiles hs">
-        <a class="tile" href="#" style="width:103px"><img src="img/v2/tile-tartaletka.png" alt="" style="--r:-12px;--b:0px"><span>Новый<br>год</span></a>
-        <a class="tile" href="#" style="width:102px"><img src="img/v2/tile-grebeshok.png" alt="" style="--r:-15px;--b:0px"><span>Private<br>chef</span></a>
-        <a class="tile" href="#" style="width:111px"><img src="img/v2/tile-draniki.png" alt="" style="--r:-21px;--b:0px"><span>Домашние<br>повара</span></a>
-        <a class="tile" href="#" style="width:130px"><img src="img/v2/tile-steik.png" alt="" style="--r:-3px;--b:0px"><span>Проф.<br>повара</span></a>
-        <a class="tile" href="#" style="width:114px"><img src="img/v2/tile-chizkeik.png" alt="" style="--r:-7px;--b:-2px"><span>Конди-<br>теры</span></a>
+        <a class="tile" href="#" style="width:103px;background:linear-gradient(-55deg,#ea352e,#82261e)"><img src="img/v2/tile-tartaletka.png" alt="" style="--r:-12px;--b:0px"><img class="tile-decor" src="img/v2/tile-vetka.png" alt=""><span>Новый<br>год</span></a>
+        <a class="tile" href="#" style="width:130px;background:linear-gradient(106.5deg,#3b642a,#68b34a)"><img src="img/v2/tile-steik.png" alt="" style="--r:-3px;--b:0px"><span>Проф.<br>повара</span></a>
+        <a class="tile" href="#" style="width:102px;background:linear-gradient(54.8deg,#000,#6c6d6c)"><img src="img/v2/tile-grebeshok.png" alt="" style="--r:-15px;--b:0px"><span>Private<br>chef</span></a>
+        <a class="tile" href="#" style="width:111px;background:linear-gradient(-49.4deg,#a9511a,#562a16)"><img src="img/v2/tile-draniki.png" alt="" style="--r:-21px;--b:0px"><span>Домашние<br>повара</span></a>
+        <a class="tile" href="#" style="width:114px;background:linear-gradient(-57.7deg,#de5025,#782b14)"><img src="img/v2/tile-chizkeik.png" alt="" style="--r:-7px;--b:-2px"><span>Конди-<br>теры</span></a>
       </div>
       <div class="filters hs">
         <button class="chip icon" type="button" aria-label="Сортировка"><img src="ic/sort.svg" alt="" width="24" height="24"></button>
@@ -67,7 +67,7 @@
       <div class="cooks">
         <article class="cook">
           <a class="cook-head" href="#">
-            <b class="cook-name">Александр Козлов</b><span class="cook-bio">Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</span>
+            <b class="cook-name">Александр Козлов</b><span class="cook-bio"><span class="cook-chef">Шеф White Rabbit</span> · Выпускник Culinary Arts Academy Switzerland, работал в ресторанах Швейцарии и США</span>
           </a>
           <div class="dishes hs">
             <a class="cook-photo" href="#"><img src="img/av-kozlov.webp" alt="Александр Козлов"><span class="photo-rate"><img src="ic/star-fill-16.svg" alt="" width="16" height="16"><span>5.0 <span class="mute">(240) · </span>₽₽<span class="mute">₽</span></span></span></a>
@@ -79,7 +79,7 @@
           <div class="facts hs">
             <span class="fact"><img src="ic/clock.svg" alt="" width="24" height="24"><span>Завтра с 11:00</span></span>
             <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
-            <span class="fact"><span class="pin" style="--line:#fc5454"><img src="ic/map-pin.svg" alt="" width="24" height="24"><i></i></span><span>Университет Дружбы Народов</span></span>
+            <span class="fact"><img src="ic/metro-msk.svg" alt="Метро" width="24" height="24"><i class="line" style="--line:#3553e8"><b>4</b></i><span>Университет Дружбы Народов</span></span>
           </div>
         </article>
 
@@ -88,7 +88,7 @@
             <b class="cook-name">Денис Сыс</b><span class="cook-bio">Шеф-повар с 10-летним стажем и международным опытом</span>
           </a>
           <div class="dishes hs">
-            <a class="cook-photo" href="#"><img src="img/av-sys.webp" alt="Денис Сыс"><span class="photo-rate"><img src="ic/star-fill-16.svg" alt="" width="16" height="16"><span>4.9 <span class="mute">(274) · </span>₽₽<span class="mute">₽</span></span></span></a>
+            <a class="cook-photo" href="#"><img src="img/av-sys.webp" alt="Денис Сыс"><span class="photo-tag"><img src="ic/room-service-16.svg" alt="" width="16" height="16"><span>Private chef</span></span><span class="photo-rate"><img src="ic/star-fill-16.svg" alt="" width="16" height="16"><span>4.9 <span class="mute">(274) · </span>₽₽<span class="mute">₽</span></span></span></a>
             <img src="img/sys-1.webp" alt="">
             <img src="img/sys-2.webp" alt="">
             <img src="img/sys-3.webp" alt="">
@@ -97,7 +97,7 @@
           <div class="facts hs">
             <span class="fact"><img src="ic/clock-green.svg" alt="" width="24" height="24"><span>Сегодня с 21:00</span></span>
             <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
-            <span class="fact"><span class="pin" style="--line:#3c8fdc"><img src="ic/map-pin.svg" alt="" width="24" height="24"><i></i></span><span>Бибирево</span></span>
+            <span class="fact"><img src="ic/metro-msk.svg" alt="Метро" width="24" height="24"><i class="line" style="--line:#a1a2a3"><b>9</b></i><span>Бибирево</span></span>
           </div>
         </article>
 
@@ -123,7 +123,7 @@
           <div class="facts hs">
             <span class="fact"><img src="ic/clock.svg" alt="" width="24" height="24"><span>Завтра с 11:00</span></span>
             <span class="fact"><img src="ic/truck.svg" alt="" width="24" height="24"><span>От 540 ₽</span></span>
-            <span class="fact"><span class="pin" style="--line:#2ba84a"><img src="ic/map-pin.svg" alt="" width="24" height="24"><i></i></span><span>Сокольники</span></span>
+            <span class="fact"><img src="ic/metro-msk.svg" alt="Метро" width="24" height="24"><i class="line" style="--line:#ef161e"><b>1</b></i><span>Сокольники</span></span>
           </div>
         </article>
       </div>
@@ -132,7 +132,7 @@
   </div>
   <nav class="tab-bar" data-active="home" data-cart="4"></nav>
 </div>
-<script src="ds/tab-bar.js?v=20261121pub5"></script>
+<script src="ds/tab-bar.js?v=20261123pub6"></script>
 <script>
   // Шапка с адресом. Пока лист далеко, фото темнеет: чем ближе лист к адресу, тем темнее, до 50 %. Когда до верха
   // листа остаётся 124 px, белый фон поднимается из-под листа быстрее него и доходит до верха, когда лист встаёт

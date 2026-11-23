@@ -80,7 +80,9 @@ img { display: block; }
    картинка вылезает за правый нижний край и обрезается. Ширина и сдвиг картинки — у каждой свои, как в макете. */
 .tiles { gap: 6px; margin-top: 16px; padding: 0 16px; }
 .tile { position: relative; flex: none; height: 72px; border-radius: var(--radius-default); background: var(--color-bg-contrast); overflow: hidden; color: var(--color-text-and-icon); text-decoration: none; }
-.tile span { position: absolute; left: 10px; top: 7px; font: var(--font-caption); white-space: nowrap; }
+.tile span { position: absolute; left: 10px; top: 7px; font: var(--font-caption); color: var(--color-text-and-icon-on-dark, #fff); white-space: nowrap; }
+/* 2026-11-23, «Ряд 4» 4829:223412: фон плиток — градиенты, текст белый; у «Нового года» поверх тарталетки ветка (отражена) */
+.tile img.tile-decor { left: -23px; right: auto; bottom: -2px; width: 84px; height: 42px; object-fit: cover; }
 .tile img { position: absolute; right: var(--r); bottom: var(--b); width: var(--w, 132px); height: var(--h, 72px); max-width: none; object-fit: contain; }
 
 /* Фильтры — 4759:200633: без иконок, кроме сортировки; выбранный белый с обводкой 1 px и крестиком.
@@ -113,8 +115,6 @@ img { display: block; }
 .facts { overflow-x: hidden; }
 /* Точка ветки метро на иконке — 6×6, обводка 1 px снаружи цвета фона (в макете #fc5454 с белой обводкой OUTSIDE 1).
    Цвет задаётся у каждого повара через --line; пока условные, разные (2026-11-20). */
-.pin { position: relative; flex: none; width: 24px; height: 24px; }
-.pin i { position: absolute; left: 16px; top: 2px; width: 6px; height: 6px; border-radius: 50%; background: var(--line, #fc5454); box-shadow: 0 0 0 1px var(--color-bg); }
 
 /* Этаж — Figma 4759:200731: имя в две строки на 144, справа регалии серым до трёх строк; рейтинг и ценовой
    сегмент — плашкой на фото. Линия 1 px (обводка верха шапки, до имени 10 — в макете 8, пользователь попросил 10 2026-11-20) только между двумя поварами подряд:
@@ -127,6 +127,12 @@ img { display: block; }
 .photo-rate { position: absolute; left: 0; bottom: 0; display: flex; align-items: flex-start; gap: 4px; padding: 6px 8px; border-radius: 0 8px 0 0; background: rgba(0, 0, 0, .24); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: var(--font-caption); color: #fff; white-space: nowrap; }
 .photo-rate span { padding-bottom: 1px; }
 .photo-rate .mute { color: #a1a6a1; }
+/* 2026-11-23: лейбл «Private chef» на фото повара — исключительный сервис (Figma 4828:222384) */
+.photo-tag { position: absolute; left: 0; top: 0; display: flex; align-items: flex-start; gap: 4px; padding: 6px 8px; border-radius: 0 0 8px 0; background: rgba(0, 0, 0, .24); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: var(--font-caption); color: #fff; white-space: nowrap; }
+.photo-tag span { padding-bottom: 1px; }
+/* 2026-11-23: метро — логотип метро города и кружок ветки с номером (Figma 4828:222367); без метро — обычный map-pin */
+.line { flex: none; display: flex; align-items: center; width: 18px; height: 24px; overflow: hidden; font-style: normal; }
+.line b { min-width: 16px; padding: 0 4px 1px; border-radius: 16px; background: var(--line); font: var(--font-caption); color: #fff; text-align: center; }
 
 
 /* Перебивка между этажами — 4759:200797: серая карточка, картинка 80 (колпак с лупой на белом пятне), заголовок
